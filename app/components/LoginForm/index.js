@@ -20,6 +20,12 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
     };
   }
 
+  handleChange = (name) => (event) => {
+    this.setState({
+      [name]: event.target.value,
+    });
+  };
+
   render() {
     return (
       <form>
