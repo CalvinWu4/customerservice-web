@@ -107,6 +107,7 @@
         "error",
         "always"
       ],
+      "linebreak-style": 0,
       "arrow-body-style": [
         2,
         "as-needed"
