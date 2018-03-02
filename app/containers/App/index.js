@@ -14,6 +14,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
+import TicketPage from 'containers/TicketPage/Loadable';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -26,6 +27,8 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/agentLogin" component={LoginPage} />
         <Route exact path="/customerLogin" component={CustomerValidationPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/ticket" component={TicketPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
