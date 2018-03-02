@@ -10,17 +10,21 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import CenterGrid from 'components/CenterGrid';
+
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectCustomerValidationPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import CustomerValidationForm from '../../components/CustomerValidationForm';
 
 export class CustomerValidationPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
-      </div>
+      <CenterGrid>
+        <CustomerValidationForm />
+      </CenterGrid>
     );
   }
 }
