@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import TicketForm from 'components/TicketForm/Loadable';
+import CommentForm from 'components/CommentForm/Loadable';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -18,11 +19,14 @@ import makeSelectTicketPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+
   render() {
     return (
       <div>
         <TicketForm />
+        <CommentForm />
       </div>
     );
   }
