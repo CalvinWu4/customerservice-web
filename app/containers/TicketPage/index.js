@@ -12,6 +12,7 @@ import { compose } from 'redux';
 
 import TicketForm from 'components/TicketForm/Loadable';
 import CommentForm from 'components/CommentForm/Loadable';
+import CenterGrid from 'components/CenterGrid';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -25,8 +26,10 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
   render() {
     return (
       <div>
-        <TicketForm />
-        <CommentForm />
+        <CenterGrid>
+          <TicketForm />
+          <CommentForm />
+        </CenterGrid>
       </div>
     );
   }

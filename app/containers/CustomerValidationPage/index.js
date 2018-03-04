@@ -12,25 +12,26 @@ import { compose } from 'redux';
 
 import CenterGrid from 'components/CenterGrid';
 
+import { push } from 'react-router-redux';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectCustomerValidationPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import CustomerValidationForm from '../../components/CustomerValidationForm';
+import CustomerValidationForm from '../../components/CustomerValidationForm/Loadable';
 
 export class CustomerValidationPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <CenterGrid>
-        <CustomerValidationForm />
+        <CustomerValidationForm onValidate={() => this.props.redirectTo('/ticket')} />
       </CenterGrid>
     );
   }
 }
 
 CustomerValidationPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  redirectTo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -39,7 +40,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    redirectTo: (url) => dispatch(push(url)),
   };
 }
 
