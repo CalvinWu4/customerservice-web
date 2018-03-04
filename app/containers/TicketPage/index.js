@@ -24,10 +24,25 @@ import saga from './saga';
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
 
   render() {
+    const blankTicket = {
+      id: 1,
+      firstname: 'First Name',
+      lastname: 'Last Name',
+      description: 'KennUWare Issue',
+      address: {
+        line1: '',
+        line2: '',
+        city: '',
+        state: '',
+        country: '',
+        zipcode: '',
+      },
+    };
+
     return (
       <div>
         <CenterGrid>
-          <TicketForm />
+          <TicketForm ticket={blankTicket} />
           <CommentForm />
         </CenterGrid>
       </div>
