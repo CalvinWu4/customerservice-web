@@ -33,9 +33,11 @@ export class AgentDashboard extends React.Component { // eslint-disable-line rea
 
   render() {
     return (
-      <Grid container alignItems="center" direction="column" justify="center" spacing={16} style={{ height: '100vh' }}>
+      <Grid container alignItems="center" direction="column" justify="flex-start" spacing={16} style={{ height: 'auto', paddingTop: '16px' }}>
         <Grid item xs={8}>
-          {this.props.agentdashboard.tickets.map((t) => <TicketForm ticket={t} />)}
+          <Grid container alignItems="center" direction="column" justify="center" spacing={16}>
+            {this.props.agentdashboard.tickets.map((t) => <Grid item xs={12}><TicketForm ticket={t} /></Grid>)}
+          </Grid>
         </Grid>
       </Grid>
     );

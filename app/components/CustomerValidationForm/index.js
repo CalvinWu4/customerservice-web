@@ -49,6 +49,9 @@ class CustomerValidationForm extends React.Component { // eslint-disable-line re
             <Grid item xs={12}>
               <Button variant="raised" color="primary" type="submit">Enter</Button>
             </Grid>
+            <Grid item xs={12}>
+              <Button variant="flat" color="secondary" href="/tickets">Agent Login</Button>
+            </Grid>
           </Grid>
         </form>
       </Paper>
