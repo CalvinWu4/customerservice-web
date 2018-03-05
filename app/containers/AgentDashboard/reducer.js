@@ -8,34 +8,7 @@ import { fromJS } from 'immutable';
 import { GET_TICKETS_SUCCEDED } from './constants';
 
 const initialState = fromJS({
-  tickets: [{
-    id: 1,
-    firstName: 'John',
-    lastName: 'Doe',
-    description: 'My phone broke',
-    address: {
-      line1: '59 pakrpoint',
-      line2: 'APT 2',
-      city: 'rochester',
-      state: 'ny',
-      country: 'usa',
-      zipcode: '02151',
-    },
-  },
-  {
-    id: 2,
-    firstName: 'John',
-    lastName: 'Doe',
-    description: 'My phone broke',
-    address: {
-      line1: '59 pakrpoint',
-      line2: 'APT 2',
-      city: 'rochester',
-      state: 'ny',
-      country: 'usa',
-      zipcode: '02151',
-    },
-  }],
+  tickets: [],
 });
 
 function agentDashboardReducer(state = initialState, action) {

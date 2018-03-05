@@ -3,9 +3,13 @@ import axios from 'axios';
 import { GET_TICKETS } from './constants';
 import { getTicketsSucceded, getTicketsFailed } from './actions';
 
+function getTicketsServerRequest() {
+  return axios.get('http://api-customerservice.azurewebsites.net/api/tickets');
+}
+
 function* getTicketsSaga() {
   try {
-    const { data } = yield call(axios.get('http://localhost:8000/api/tickets'));
+    const { data } = yield call(getTicketsServerRequest);
     yield put(getTicketsSucceded(data));
   } catch (e) {
     yield put(getTicketsFailed(e));
