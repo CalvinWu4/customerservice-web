@@ -19,11 +19,32 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
 
     this.state = {
       disabled: true,
-      CustomerEmail: '',
-      Issue: '',
-      Priority: '',
-      Complexity: '',
+      email: props.ticket.CustomerEmail,
+      description: props.ticket.description,
+      status: props.ticket.status,
+      firstName: props.ticket.firstName,
+      lastName: props.ticket.lastName,
     };
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      disabled: true,
+      email: newProps.ticket.CustomerEmail,
+      description: newProps.ticket.description,
+      status: newProps.ticket.status,
+      firstName: newProps.ticket.firstName,
+      lastName: newProps.ticket.lastName,
+      address: {
+        line1: '123 Golisano Rd',
+        line2: 'apt 3',
+        city: 'Rochester',
+        state: 'ny',
+        zipcode: '14623',
+        country: 'usa',
+      },
+    },
+   );
   }
 
   handleChange = (name) => (event) => {
@@ -34,6 +55,9 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
 
   editForm = () => {
     this.setState({ disabled: !this.state.disabled });
+    if (this.props.onCreate) {
+      this.props.onCreate(this.state);
+    }
   }
   isDisabled() {
     return (this.state.disabled);
@@ -53,13 +77,13 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
             */}
             <h1>Ticket</h1>
             <h3>Customer Details</h3>
-            <TextField label="Customer" name="CustomerName" defaultValue={`${this.props.ticket.firstName} ${this.props.ticket.lastName}`} disabled={this.state.disabled} />
-            <TextField label="Customer Email" name="CustomerEmail" type="email" defaultValue={this.props.ticket.email} disabled={this.state.disabled} onChange={this.handleChange} />
+            <TextField label="Customer" name="CustomerName" defaultValue={`${this.state.firstName} ${this.state.lastName}`} disabled={this.state.disabled} />
+            <TextField label="Customer Email" name="CustomerEmail" type="email" defaultValue={this.state.email} disabled={this.state.disabled} onChange={this.handleChange} />
             <h3>Issue Details</h3>
-            <TextField label="Issue" name="IssueDescription" defaultValue={this.props.ticket.description} disabled={this.state.disabled} onChange={this.handleChange} />
+            <TextField label="Issue" name="IssueDescription" defaultValue={this.state.description} disabled={this.state.disabled} onChange={this.handleChange} />
             <TextField label="Agent Assigned" name="AgentAssigned" defaultValue="Best CS Agent" disabled />
             <TextField label="Priority" name="Priority" defaultValue="High/Medium/Low" disabled={this.state.disabled} onChange={this.handleChange} />
-            <TextField label="Status" name="Status" defaultValue={this.props.ticket.status} disabled={this.state.disabled} onChange={this.handleChange} />
+            <TextField label="Status" name="Status" defaultValue={this.state.status} disabled={this.state.disabled} onChange={this.handleChange} />
             <TextField label="Complexity" name="Complexity" defaultValue="Complexity" disabled={this.state.disabled} onChange={this.handleChange} />
             <TextField id="date" name="OpenDate" label="Opened On" type="date" defaultValue="2018-03-06" disabled />
             <h3>Product</h3>
@@ -77,6 +101,7 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
 
 TicketForm.propTypes = {
   ticket: PropTypes.object.isRequired,
+  onCreate: PropTypes.func.isRequired,
 
 };
 

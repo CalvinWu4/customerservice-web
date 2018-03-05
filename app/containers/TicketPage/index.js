@@ -19,10 +19,17 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectTicketPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { postTicket } from './actions';
 
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
-
+  constructor(props) {
+    super(props);
+    this.onCreateTicket = this.onCreateTicket.bind(this);
+  }
+  onCreateTicket(ticket) {
+    this.props.postTicket(ticket);
+  }
   render() {
     const blankTicket = {
       id: 1,
@@ -42,7 +49,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     return (
       <div>
         <CenterGrid>
-          <TicketForm ticket={blankTicket} />
+          <TicketForm ticket={blankTicket} onCreate={this.onCreateTicket} />
           <CommentForm />
         </CenterGrid>
       </div>
@@ -51,7 +58,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 }
 
 TicketPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  postTicket: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -60,7 +67,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    postTicket: (ticket) => dispatch(postTicket(ticket)),
   };
 }
 

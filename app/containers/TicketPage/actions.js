@@ -5,11 +5,27 @@
  */
 
 import {
-  DEFAULT_ACTION,
+   POST_TICKET, POST_TICKET_SUCCESS, POST_TICKET_FAIL,
 } from './constants';
 
-export function defaultAction() {
+
+export function postTicket(ticket) {
   return {
-    type: DEFAULT_ACTION,
+    type: POST_TICKET,
+    ticket,
   };
 }
+export function postTicketSuccess(ticket) {
+  return {
+    type: POST_TICKET_SUCCESS,
+    ticket,
+  };
+}
+
+export function postTicketFailure(error) {
+  return {
+    type: POST_TICKET_FAIL,
+    error,
+  };
+}
+
