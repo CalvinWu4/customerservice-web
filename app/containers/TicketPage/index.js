@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import TicketForm from 'components/TicketForm/Loadable';
+import CreateTicketForm from 'components/CreateTicketForm';
 import CommentForm from 'components/CommentForm/Loadable';
 import CenterGrid from 'components/CenterGrid';
 
@@ -30,26 +30,12 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
   onCreateTicket(ticket) {
     this.props.postTicket(ticket);
   }
-  render() {
-    const blankTicket = {
-      id: 1,
-      firstname: 'First Name',
-      lastname: 'Last Name',
-      description: 'KennUWare Issue',
-      address: {
-        line1: '',
-        line2: '',
-        city: '',
-        state: '',
-        country: '',
-        zipcode: '',
-      },
-    };
 
+  render() {
     return (
       <div>
         <CenterGrid>
-          <TicketForm ticket={blankTicket} onCreate={this.onCreateTicket} />
+          <CreateTicketForm onCreate={this.onCreateTicket} />
           <CommentForm />
         </CenterGrid>
       </div>

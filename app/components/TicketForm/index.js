@@ -53,12 +53,6 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
     });
   };
 
-  editForm = () => {
-    this.setState({ disabled: !this.state.disabled });
-    if (this.props.onCreate) {
-      this.props.onCreate(this.state);
-    }
-  }
   isDisabled() {
     return (this.state.disabled);
   }
@@ -101,8 +95,6 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
 
 TicketForm.propTypes = {
   ticket: PropTypes.object.isRequired,
-  onCreate: PropTypes.func.isRequired,
-
 };
 
 export default TicketForm;
