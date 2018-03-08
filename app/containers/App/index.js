@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+import Reboot from 'material-ui/Reboot';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
@@ -21,11 +21,13 @@ import NotFoundPage from 'containers/NotFoundPage/Loadable';
 export default function App() {
   return (
     <div>
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/login" component={LoginPage} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <Reboot>
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Reboot>
     </div>
   );
 }
