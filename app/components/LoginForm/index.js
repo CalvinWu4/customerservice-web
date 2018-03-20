@@ -6,9 +6,12 @@
 
 import React from 'react';
 
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
+
+import style from './style';
 
 class LoginForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -22,19 +25,14 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
 
   render() {
     return (
-      <form>
-        <Grid container alignItems="center" direction="column" justify="center" spacing={16}>
-          <Grid item xs={12}>
-            <TextField id="email" label="Email" type="email" name="email" onChange={this.handleChange} required />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField id="password" label="Password" type="password" name="password" onChange={this.handleChange} required />
-          </Grid>
-          <Grid item xs={12}>
-            <Button variant="raised" color="secondary" type="submit">Login</Button>
-          </Grid>
-        </Grid>
-      </form>
+      <Paper style={style.paper} elevation={4}>
+        <Typography variant="headline" component="h3">Sign in</Typography>
+        <Typography component="p">With your agent account</Typography>
+        <TextField style={style.emailTextField} label="Email" type="email" />
+        <TextField style={style.passwordTextField} label="Password" type="password" />
+        <Typography style={style.forgotEmailLabel} component="p">Forgot email?</Typography>
+        <Button style={style.button} variant="raised" color="primary">Next</Button>
+      </Paper>
     );
   }
 }
