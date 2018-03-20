@@ -5,11 +5,14 @@
 */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
+
+import isEmail from 'validator/lib/isEmail';
 
 import style from './style';
 
@@ -18,9 +21,73 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
+      email: {
+        value: '',
+        isInvalid: false,
+        helperText: '',
+      },
+      password: {
+        value: '',
+        isInvalid: false,
+        helperText: '',
+      },
     };
+
+    this.onChange = this.onChange.bind(this);
+    this.onLogin = this.onLogin.bind(this);
+
+    this.validateEmail = this.validateEmail.bind(this);
+    this.validatePassword = this.validatePassword.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({
+      [e.target.name]: { ...this.state[e.target.name], value: e.target.value },
+    });
+  }
+
+  onLogin() {
+    const isEmailValid = this.validateEmail();
+    const isPasswordValid = this.validatePassword();
+
+    if (!isEmailValid || !isPasswordValid) return;
+
+    this.props.onLogin({
+      email: this.state.email.value,
+      password: this.state.password.value,
+    });
+  }
+
+  validateEmail() {
+    let isInvalid = false;
+    let helperText = '';
+
+    if (!isEmail(this.state.email.value)) {
+      isInvalid = true;
+      helperText = 'That\'s not a real email';
+    }
+
+    this.setState({
+      email: { ...this.state.email, isInvalid, helperText },
+    });
+
+    return !isInvalid;
+  }
+
+  validatePassword() {
+    let isInvalid = false;
+    let helperText = '';
+
+    if (this.state.password.value.length < 6) {
+      isInvalid = true;
+      helperText = 'Password must be at least 6 characters';
+    }
+
+    this.setState({
+      password: { ...this.state.password, isInvalid, helperText },
+    });
+
+    return !isInvalid;
   }
 
   render() {
@@ -28,17 +95,17 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
       <Paper style={style.paper} elevation={4}>
         <Typography variant="headline" component="h3">Sign in</Typography>
         <Typography component="p">With your agent account</Typography>
-        <TextField style={style.emailTextField} label="Email" type="email" />
-        <TextField style={style.passwordTextField} label="Password" type="password" />
+        <TextField style={style.emailTextField} label="Email" type="email" name="email" helperText={this.state.email.helperText} error={this.state.email.isInvalid} onChange={this.onChange} autoFocus />
+        <TextField style={style.passwordTextField} label="Password" type="password" name="password" helperText={this.state.password.helperText} error={this.state.password.isInvalid} onChange={this.onChange} />
         <Typography style={style.forgotEmailLabel} component="p">Forgot email?</Typography>
-        <Button style={style.button} variant="raised" color="primary">Next</Button>
+        <Button style={style.button} variant="raised" color="primary" onClick={this.onLogin}>Next</Button>
       </Paper>
     );
   }
 }
 
 LoginForm.propTypes = {
-
+  onLogin: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

@@ -24,7 +24,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
   render() {
     return (
       <CenterGrid>
-        <LoginForm />
+        <LoginForm onLogin={(e) => console.log(e)} />
       </CenterGrid>
     );
   }
