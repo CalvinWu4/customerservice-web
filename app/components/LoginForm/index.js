@@ -94,7 +94,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
     return (
       <Paper style={style.paper} elevation={4}>
         <Typography variant="headline" component="h3">Sign in</Typography>
-        <Typography component="p">With your agent account</Typography>
+        <Typography component="p">With your {this.props.name} account</Typography>
         <TextField style={style.emailTextField} label="Email" type="email" name="email" helperText={this.state.email.helperText} error={this.state.email.isInvalid} onChange={this.onChange} autoFocus />
         <TextField style={style.passwordTextField} label="Password" type="password" name="password" helperText={this.state.password.helperText} error={this.state.password.isInvalid} onChange={this.onChange} />
         <Typography style={style.forgotEmailLabel} component="p">Forgot email?</Typography>
@@ -105,6 +105,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
 }
 
 LoginForm.propTypes = {
+  name: PropTypes.string.isRequired,
   onLogin: PropTypes.func.isRequired,
 };
 
