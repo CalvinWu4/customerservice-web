@@ -14,6 +14,7 @@ import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 
 import style from './style';
+import kennUWareWatch from './images/KennUWareWatch.png';
 
 class RegistrationForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -51,8 +52,9 @@ class RegistrationForm extends React.Component { // eslint-disable-line react/pr
             </Grid>
           </Grid>
           <Grid item xs={6}>
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-              Picture here
+            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', flexDirection: 'column' }}>
+              <img src={kennUWareWatch} alt="Kenn Model X Watch" style={{ width: '150px' }} />
+              <Typography variant="caption" style={{ paddingTop: '10px' }}>Kenn Model X</Typography>
             </div>
           </Grid>
         </Grid>
