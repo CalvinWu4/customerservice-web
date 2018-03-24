@@ -16,7 +16,9 @@ import { Switch, Route } from 'react-router-dom';
 import Reboot from 'material-ui/Reboot';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage';
+import TicketPage from 'containers/TicketPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+
 
 export default function App() {
   return (
@@ -25,6 +27,7 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/ticket/view" component={TicketPage} />
           <Route component={NotFoundPage} />
         </Switch>
       </Reboot>
