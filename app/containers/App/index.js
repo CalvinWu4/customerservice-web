@@ -19,6 +19,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import ClientLoginPage from 'containers/ClientLoginPage';
 import AgentLoginPage from 'containers/AgentLoginPage';
 import TicketPage from 'containers/TicketPage';
+import ClientRegistrationPage from 'containers/ClientRegistrationPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 
@@ -30,6 +31,7 @@ export default function App() {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/clients/login" component={ClientLoginPage} />
           <Route exact path="/agents/login" component={AgentLoginPage} />
+          <Route exact path="/clients/register" component={ClientRegistrationPage} />
           <Route exact path="/ticket/view" component={TicketPage} />
           <Route component={NotFoundPage} />
         </Switch>
