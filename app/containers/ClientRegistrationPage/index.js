@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
-import CenterGrid from 'components/CenterGrid';
+import RegistrationForm from 'components/RegistrationForm';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -21,8 +21,9 @@ import saga from './saga';
 export class ClientRegistrationPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <CenterGrid>
-      </CenterGrid>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <RegistrationForm onRegister={(e) => console.log(e)} />
+      </div>
     );
   }
 }
