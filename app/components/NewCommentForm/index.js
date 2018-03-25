@@ -20,14 +20,14 @@ class NewCommentForm extends React.Component { // eslint-disable-line react/pref
     return (
       <div id="container">
         <Card style={style.Card}>
-          <Grid alignItems="stretch" justify="flex-start" direction="column">
-            <Grid item s={12} >
+          <Grid container alignItems="stretch" justify="flex-start" direction="column">
+            <Grid item xs={12} >
               <TextField style={style.TextField} defaultValue="Subject">Subject</TextField>
             </Grid>
-            <Grid item s={12} >
+            <Grid item xs={12} >
               <TextField style={style.TextField} defaultValue="Comment">New Comment</TextField>
             </Grid>
-            <Button>Post</Button>
+            <Button variant="raised">Post</Button>
           </Grid>
         </Card>
       </div>

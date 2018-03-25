@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import Typography from 'material-ui';
+import Typography from 'material-ui/Typography';
 import Card from 'material-ui/Card';
 import Grid from 'material-ui/Grid';
 
@@ -16,13 +16,13 @@ class StoredCommentForm extends React.Component { // eslint-disable-line react/p
       <div>
         <Card>
           <Grid container>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <Typography variant="title">Subject</Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <Typography variant="title">Author</Typography>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item xs={4}>
               <Typography variant="title">Date</Typography>
             </Grid>
             <Grid item xs={12}>

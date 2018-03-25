@@ -11,33 +11,33 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import Typography from 'material-ui/Typography';
+import NewCommentForm from 'components/NewCommentForm';
+import TicketForm from 'components/TicketForm';
+import StoredCommentForm from 'components/StoredCommentForm';
+
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectTicketPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import style from './style';
 
-import NewCommentForm from '../../components/NewCommentForm';
-/* import TicketForm from '../../components/TicketForm';
-  import StoredCommentForm from '../../components/StoredCommentForm';
-  */
+const fakeTicket = {
+  title: 'Ticket Title Test',
 
+};
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <div>
-        <Typography varaint="body1" align="right">Logout [email address]</Typography>
-        <Typography variant="headline" >Ticket</Typography>
-        {/* Insert TicketForm Component here */}
-        {/* <TicketForm></TicketForm> */}
-        <Typography variant="headline" >Comments</Typography>
-        {/* Insert StoredCommentForm Component here */}
-        {/* <StoredCommentForm></StoredCommentForm> */}
-        <Typography variant="subheading" >Add New Comment</Typography>
-        {/* Insert NewCommentForm Component here */}
-        <NewCommentForm></NewCommentForm>
+      <div style={style.ticketView}>
+        <Typography variant="body1" align="right" >Logout [email address]</Typography>
+        <TicketForm props={fakeTicket}></TicketForm>
+        <Typography variant="headline" style={style.childComponents}>Comments</Typography>
+        <StoredCommentForm> </StoredCommentForm>
+        <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
+        <NewCommentForm ></NewCommentForm>
       </div>
     );
   }
