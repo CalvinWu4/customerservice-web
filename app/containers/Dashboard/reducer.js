@@ -8,7 +8,7 @@ import { fromJS } from 'immutable';
 import { GET_TICKETS_SUCCEDED } from './constants';
 
 const initialState = fromJS({
-  tickets: [{ key: '1', title: 'Device On Fire', device: { model: 'Fireproof Watch' }, openDate: '3/2/18', status: 'Hot' }],
+  tickets: [{ id: '1', title: 'Device On Fire', device: { model: 'Fireproof Watch' }, openDate: '3/2/18', status: 'Hot' }],
 });
 
 function dashboardReducer(state = initialState, action) {

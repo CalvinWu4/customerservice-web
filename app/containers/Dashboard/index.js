@@ -7,6 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -19,6 +20,7 @@ import makeSelectDashboard from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { getTickets } from './actions';
+import Typography from 'material-ui';
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -34,10 +36,17 @@ export class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Paper>
-          {/* TODO: Select Agent/Client Ticket Table based on user's class in JWT */}
-          <ClientTicketTable tickets={this.props.dashboard.tickets} />
-        </Paper>
+        <Grid container alignItems="center" direction="row" justify="center">
+          <Grid item xs={6}>
+            <Typography variant="headline" color="primary">My Tickets</Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Paper>
+              {/* TODO: Select Agent/Client Ticket Table based on user's class in JWT */}
+              <ClientTicketTable tickets={this.props.dashboard.tickets} />
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     );
   }
