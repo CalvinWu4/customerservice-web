@@ -44,7 +44,7 @@ export class Dashboard extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tickets.map(t =>{
+              {props.dashboard.tickets.map(t =>{
                 return (
                   <TableRow key={t.id}>
                     <TableCell>{t.title}</TableCell>
