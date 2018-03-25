@@ -21,6 +21,7 @@ import AgentLoginPage from 'containers/AgentLoginPage';
 import TicketPage from 'containers/TicketPage';
 import ClientRegistrationPage from 'containers/ClientRegistrationPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
+import Dashboard from 'containers/Dashboard/Loadable';
 
 
 export default function App() {
@@ -34,6 +35,7 @@ export default function App() {
           <Route exact path="/clients/register" component={ClientRegistrationPage} />
           <Route exact path="/ticket/view" component={TicketPage} />
           <Route component={NotFoundPage} />
+          <Route exact path="/tickets" component={Dashboard} />
         </Switch>
       </Reboot>
     </div>
