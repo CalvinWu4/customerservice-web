@@ -8,6 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
+import Typography from 'material-ui/Typography';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -20,7 +21,6 @@ import makeSelectDashboard from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { getTickets } from './actions';
-import Typography from 'material-ui';
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -36,9 +36,9 @@ export class Dashboard extends React.Component {
   render() {
     return (
       <div>
-        <Grid container alignItems="center" direction="row" justify="center">
+        <Grid container alignItems="center" direction="row" justify="center" spacing={16} style={{ height: '100vh' }}>
           <Grid item xs={6}>
-            <Typography variant="headline" color="primary">My Tickets</Typography>
+            <Typography variant="headline" color="primary" align="center">My Tickets</Typography>
           </Grid>
           <Grid item xs={8}>
             <Paper>
