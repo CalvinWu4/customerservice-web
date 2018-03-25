@@ -5,6 +5,8 @@
 */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 // import styled from 'styled-components';
 
 
@@ -12,31 +14,31 @@ class AgentTicketTable extends React.Component { // eslint-disable-line react/pr
   render() {
     return (
       <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Issue</TableCell>
-                <TableCell>Device Model</TableCell>
-                <TableCell>Customer</TableCell>
-                <TableCell>Priority</TableCell>
-                <TableCell>Date Opened</TableCell>
-                <TableCell>Status</TableCell>
+        <TableHead>
+          <TableRow>
+            <TableCell>Issue</TableCell>
+            <TableCell>Device Model</TableCell>
+            <TableCell>Customer</TableCell>
+            <TableCell>Priority</TableCell>
+            <TableCell>Date Opened</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {this.props.tickets.map((t) => {
+            return (
+              <TableRow key={t.id}>
+                <TableCell>{t.title}</TableCell>
+                <TableCell>{t.device.model}</TableCell>
+                <TableCell>{t.client.name}</TableCell>
+                <TableCell>{t.priority}</TableCell>
+                <TableCell>{t.openDate}</TableCell>
+                <TableCell>{t.status}</TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.props.tickets.map(t =>{
-                return (
-                  <TableRow key={t.id}>
-                    <TableCell>{t.title}</TableCell>
-                    <TableCell>{t.device.model}</TableCell>
-                    <TableCell>{t.client.name}</TableCell>
-                    <TableCell>{t.priority}</TableCell>
-                    <TableCell>{t.openDate}</TableCell>
-                    <TableCell>{t.status}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+            );
+          })}
+        </TableBody>
+      </Table>
     );
   }
 }

@@ -6,7 +6,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -23,7 +22,7 @@ import { getTickets } from './actions';
 
 export class Dashboard extends React.Component {
   componentDidMount() {
-    this.props.getTickets();
+    // this.props.getTickets();
   }
 
   handleChange = (name) => (event) => {
@@ -36,8 +35,8 @@ export class Dashboard extends React.Component {
     return (
       <div>
         <Paper>
-          // TODO: Select Agent/Client Ticket Table based on user's class in JWT
-          <ClientTicketTable tickets={this.tickets}/>
+          {/* TODO: Select Agent/Client Ticket Table based on user's class in JWT */}
+          <ClientTicketTable tickets={this.props.dashboard.tickets} />
         </Paper>
       </div>
     );
@@ -45,7 +44,7 @@ export class Dashboard extends React.Component {
 }
 
 Dashboard.propTypes = {
-  getTickets: PropTypes.func.isRequired,
+  // getTickets: PropTypes.func.isRequired,
   dashboard: PropTypes.object.isRequired,
 };
 

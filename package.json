@@ -108,6 +108,7 @@
         "always"
       ],
       "arrow-body-style": [
+        0,
         "as-needed"
       ],
       "class-methods-use-this": 0,

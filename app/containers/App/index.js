@@ -34,8 +34,8 @@ export default function App() {
           <Route exact path="/agents/login" component={AgentLoginPage} />
           <Route exact path="/clients/register" component={ClientRegistrationPage} />
           <Route exact path="/ticket/view" component={TicketPage} />
-          <Route component={NotFoundPage} />
           <Route exact path="/tickets" component={Dashboard} />
+          <Route component={NotFoundPage} />
         </Switch>
       </Reboot>
     </div>
