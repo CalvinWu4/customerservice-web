@@ -12,6 +12,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
+import ClientTicketTable from 'components/ClientTicketTable';
+
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectDashboard from './selectors';
@@ -34,28 +36,8 @@ export class Dashboard extends React.Component {
     return (
       <div>
         <Paper>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Issue</TableCell>
-                <TableCell>Device Model</TableCell>
-                <TableCell>Date Opened</TableCell>
-                <TableCell>Status</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {props.dashboard.tickets.map(t =>{
-                return (
-                  <TableRow key={t.id}>
-                    <TableCell>{t.title}</TableCell>
-                    <TableCell>{t.device.model}</TableCell>
-                    <TableCell>{t.openDate}</TableCell>
-                    <TableCell>{t.status}</TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+          // TODO: Select Agent/Client Ticket Table based on user's class in JWT
+          <ClientTicketTable tickets={this.tickets}/>
         </Paper>
       </div>
     );

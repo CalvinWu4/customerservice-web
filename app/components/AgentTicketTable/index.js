@@ -1,6 +1,6 @@
 /**
 *
-* ClientTicketTable
+* AgentTicketTable
 *
 */
 
@@ -8,7 +8,7 @@ import React from 'react';
 // import styled from 'styled-components';
 
 
-class ClientTicketTable extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class AgentTicketTable extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <Table>
@@ -16,6 +16,8 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
               <TableRow>
                 <TableCell>Issue</TableCell>
                 <TableCell>Device Model</TableCell>
+                <TableCell>Customer</TableCell>
+                <TableCell>Priority</TableCell>
                 <TableCell>Date Opened</TableCell>
                 <TableCell>Status</TableCell>
               </TableRow>
@@ -26,6 +28,8 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
                   <TableRow key={t.id}>
                     <TableCell>{t.title}</TableCell>
                     <TableCell>{t.device.model}</TableCell>
+                    <TableCell>{t.client.name}</TableCell>
+                    <TableCell>{t.priority}</TableCell>
                     <TableCell>{t.openDate}</TableCell>
                     <TableCell>{t.status}</TableCell>
                   </TableRow>
@@ -37,8 +41,8 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
   }
 }
 
-ClientTicketTable.propTypes = {
+AgentTicketTable.propTypes = {
   tickets: PropTypes.object.isRequired,
 };
 
-export default ClientTicketTable;
+export default AgentTicketTable;
