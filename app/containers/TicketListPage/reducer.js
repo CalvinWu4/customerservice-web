@@ -1,23 +1,25 @@
 /*
  *
- * Dashboard reducer
+ * TicketListPage reducer
  *
  */
 
 import { fromJS } from 'immutable';
-import { GET_TICKETS_SUCCEDED } from './constants';
+import {
+  DEFAULT_ACTION,
+} from './constants';
 
 const initialState = fromJS({
   tickets: [{ id: '1', title: 'Device On Fire', device: { model: 'Fireproof Watch' }, openDate: '3/2/18', status: 'Hot' }],
 });
 
-function dashboardReducer(state = initialState, action) {
+function ticketListPageReducer(state = initialState, action) {
   switch (action.type) {
-    case GET_TICKETS_SUCCEDED:
-      return state.set('tickets', fromJS(action.tickets));
+    case DEFAULT_ACTION:
+      return state;
     default:
       return state;
   }
 }
 
-export default dashboardReducer;
+export default ticketListPageReducer;

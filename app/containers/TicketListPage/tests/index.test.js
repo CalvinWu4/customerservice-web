@@ -1,9 +1,9 @@
 // import React from 'react';
 // import { shallow } from 'enzyme';
 
-// import { Dashboard } from '../index';
+// import { TicketListPage } from '../index';
 
-describe('<Dashboard />', () => {
+describe('<TicketListPage />', () => {
   it('Expect to have unit tests specified', () => {
     expect(true).toEqual(false);
   });
