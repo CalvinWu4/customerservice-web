@@ -12,6 +12,7 @@ import { compose } from 'redux';
 
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 
 import injectSaga from 'utils/injectSaga';
@@ -31,8 +32,14 @@ export class HomePage extends React.Component { // eslint-disable-line react/pre
         </Grid>
         <Grid item xs={4}>
           <Paper style={style.paper}>
-            <Typography component="p" color="primary">I am a customer</Typography>
-            <Typography component="p" color="secondary">I am a service agent</Typography>
+            <Grid container alignItems="center" direction="row" justify="center">
+              <Grid item xs={12}>
+                <Button variant="button" color="primary">I am a customer</Button>
+              </Grid>
+              <Grid item xs={12}>
+                <Button color="secondary">I am a service agent</Button>
+              </Grid>
+            </Grid>
           </Paper>
         </Grid>
       </Grid>
