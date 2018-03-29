@@ -26,15 +26,15 @@ import TicketListPage from 'containers/TicketListPage/Loadable';
 export default function App() {
   return (
     <div>
-        <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/clients/login" component={ClientLoginPage} />
-          <Route exact path="/agents/login" component={AgentLoginPage} />
-          <Route exact path="/clients/register" component={ClientRegistrationPage} />
-          <Route exact path="/ticket/view" component={TicketPage} />
-          <Route exact path="/tickets" component={Dashboard} />
-          <Route component={NotFoundPage} />
-        </Switch>
+      <Switch>
+        <Route exact path="/" component={HomePage} />
+        <Route exact path="/clients/login" component={ClientLoginPage} />
+        <Route exact path="/agents/login" component={AgentLoginPage} />
+        <Route exact path="/clients/register" component={ClientRegistrationPage} />
+        <Route exact path="/ticket/view" component={TicketPage} />
+        <Route exact path="/tickets" component={TicketListPage} />
+        <Route component={NotFoundPage} />
+      </Switch>
     </div>
   );
 }
