@@ -23,7 +23,7 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
         <TableCell>{t.title}</TableCell>
         <TableCell>{t.deviceId}</TableCell>
         {/* <TableCell>{t.device.model}</TableCell> */}
-        <TableCell>{t.opened}</TableCell>
+        <TableCell>{new Date(t.opened).toDateString()}</TableCell>
         <TableCell>{t.status}</TableCell>
       </TableRow>
     );
