@@ -1,24 +1,66 @@
-/*
+/**
+ *
  * HomePage
  *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+import Paper from 'material-ui/Paper';
+import Typography from 'material-ui/Typography';
+import Grid from 'material-ui/Grid';
+
+import injectSaga from 'utils/injectSaga';
+import injectReducer from 'utils/injectReducer';
+import makeSelectHomePage from './selectors';
+import reducer from './reducer';
+import saga from './saga';
+
+import style from './style';
+
+export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <Grid container alignItems="stretch" direction="row" justify="center" style={{ height: '100vh' }}>
+        <Grid item xs={12}>
+          <Typography variant="headline" align="center" color="black">Welcome to the KennUWare Customer Service Portal!</Typography>
+        </Grid>
+        <Grid item xs={4}>
+          <Paper style={style.paper}>
+            <Typography component="p" color="primary">I am a customer</Typography>
+            <Typography component="p" color="secondary">I am a service agent</Typography>
+          </Paper>
+        </Grid>
+      </Grid>
     );
   }
 }
+
+HomePage.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  homepage: makeSelectHomePage(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+const withReducer = injectReducer({ key: 'homePage', reducer });
+const withSaga = injectSaga({ key: 'homePage', saga });
+
+export default compose(
+  withReducer,
+  withSaga,
+  withConnect,
+)(HomePage);
