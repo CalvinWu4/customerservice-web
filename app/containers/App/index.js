@@ -17,10 +17,11 @@ import { Switch, Route } from 'react-router-dom';
 import HomePage from 'containers/HomePage/Loadable';
 import ClientLoginPage from 'containers/ClientLoginPage';
 import AgentLoginPage from 'containers/AgentLoginPage';
+import TicketListPage from 'containers/TicketListPage';
 import TicketPage from 'containers/TicketPage';
 import ClientRegistrationPage from 'containers/ClientRegistrationPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
-import TicketListPage from 'containers/TicketListPage/Loadable';
+import NewTicketPage from 'containers/NewTicketPage/Loadable';
 
 
 export default function App() {
@@ -32,7 +33,8 @@ export default function App() {
           <Route exact path="/agents/login" component={AgentLoginPage} />
           <Route exact path="/clients/register" component={ClientRegistrationPage} />
           <Route exact path="/ticket/view" component={TicketPage} />
-          <Route exact path="/tickets" component={Dashboard} />
+          <Route exact path="/tickets" component={TicketListPage} />
+          <Route exact path="/ticket/create" component={NewTicketPage} />
           <Route component={NotFoundPage} />
         </Switch>
     </div>
