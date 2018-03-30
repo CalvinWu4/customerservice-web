@@ -20,8 +20,6 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
       ticket: {
         title: '',
         description: '',
-        model: '',
-        serial: '',
         priority: '',
         status: 'new',
       },
@@ -33,7 +31,7 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
     });
   }
   /*
-   * Need to automate the setting of the open date and the setting of a customer support agent
+   * Need to automate the setting of the open date and the setting of a customer support agent, getting customer information
    */
   render() {
     return (
