@@ -1,6 +1,6 @@
 /*
  *
- * ClientLoginPage actions
+ * HomePage actions
  *
  */
 

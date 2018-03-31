@@ -21,8 +21,13 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectTicketListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { getMyTickets } from './actions';
 
 export class TicketListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    this.props.getMyTickets();
+  }
+
   render() {
     return (
       <Grid container alignItems="center" direction="row" justify="center" spacing={16} style={{ height: '100vh' }}>
@@ -42,6 +47,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
 
 TicketListPage.propTypes = {
   ticketlistpage: PropTypes.object.isRequired,
+  getMyTickets: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -50,7 +56,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    getMyTickets: () => dispatch(getMyTickets()),
   };
 }
 

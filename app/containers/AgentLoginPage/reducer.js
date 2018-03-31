@@ -6,14 +6,14 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  AUTHENTICATE_USER_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({});
 
 function agentLoginPageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
+    case AUTHENTICATE_USER_SUCCESS:
       return state;
     default:
       return state;
