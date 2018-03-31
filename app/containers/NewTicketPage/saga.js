@@ -1,4 +1,5 @@
- import { takeLatest, call, put } from 'redux-saga/effects';
+/*
+import { takeLatest, call, put } from 'redux-saga/effects';
 import { CREATE_TICKET } from './constants';
 
 // Individual exports for testing
@@ -11,3 +12,4 @@ export default function* defaultSaga() {
     takeLatest(CREATE_TICKET, createTicketSaga),
   ]
 }
+*/
