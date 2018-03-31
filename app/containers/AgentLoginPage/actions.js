@@ -5,11 +5,25 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  AUTHENTICATE_USER,
+  AUTHENTICATE_USER_SUCCESS,
+  AUTHENTICATE_USER_FAILURE,
 } from './constants';
 
-export function defaultAction() {
+export function authenticateUser() {
   return {
-    type: DEFAULT_ACTION,
+    type: AUTHENTICATE_USER,
+  };
+}
+
+export function authenticateUserSuccess() {
+  return {
+    type: AUTHENTICATE_USER_SUCCESS,
+  };
+}
+
+export function authenticateUserFailure() {
+  return {
+    type: AUTHENTICATE_USER_FAILURE,
   };
 }

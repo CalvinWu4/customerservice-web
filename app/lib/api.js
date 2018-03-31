@@ -14,7 +14,8 @@ export function addTicket(ticketData) {
   return axios.post(`${domain}tickets`, ticketData);
 }
 
-export function authenticateUser(userData) {
-  // TODO: call out to HR
-  return userData;
+export function authenticateUser(/* userData */) {
+  // TODO: call out to HR endpoint and return true/false
+  // Stubbed to always return true for Release 2
+  return true;
 }

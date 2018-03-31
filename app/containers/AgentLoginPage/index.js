@@ -18,19 +18,20 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectAgentLoginPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { authenticateUser } from './actions';
 
 export class AgentLoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <CenterGrid>
-        <LoginForm name="agent" onLogin={(e) => console.log(e)} />
+        <LoginForm name="agent" onLogin={() => this.props.authenticateUser()} />
       </CenterGrid>
     );
   }
 }
 
 AgentLoginPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  authenticateUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -39,7 +40,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    authenticateUser: () => dispatch(authenticateUser()),
   };
 }
 
