@@ -39,7 +39,7 @@ export class NewTicketPage extends React.Component { // eslint-disable-line reac
     return (
       <div style={divStyle}>
         <Typography variant="title" component="h2" style={titleStyle}>Create Ticket</Typography>
-        <NewTicketForm></NewTicketForm>
+        <NewTicketForm onCreateTicket={(e) => console.log(e)} />
       </div>
     );
   }
