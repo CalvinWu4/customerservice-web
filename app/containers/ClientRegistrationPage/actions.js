@@ -5,11 +5,26 @@
  */
 
 import {
-  DEFAULT_ACTION,
+  REGISTER,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
 } from './constants';
 
-export function defaultAction() {
+export function registerUser(client) {
   return {
-    type: DEFAULT_ACTION,
+    type: REGISTER,
+    client,
+  };
+}
+
+export function registerUserSuccess() {
+  return {
+    type: REGISTER_SUCCESS,
+  };
+}
+
+export function registerUserFailure() {
+  return {
+    type: REGISTER_FAILURE,
   };
 }

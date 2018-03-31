@@ -18,18 +18,20 @@ import makeSelectClientRegistrationPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
+import { registerUser } from './actions';
+
 export class ClientRegistrationPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <RegistrationForm onRegister={(e) => console.log(e)} />
+        <RegistrationForm onRegister={(e) => this.props.registerUser(e)} />
       </div>
     );
   }
 }
 
 ClientRegistrationPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  registerUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -38,7 +40,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    registerUser: (e) => dispatch(registerUser(e)),
   };
 }
 
