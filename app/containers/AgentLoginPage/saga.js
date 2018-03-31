@@ -1,6 +1,7 @@
 import { authenticateUser } from 'lib/api';
 import { takeLatest, put } from 'redux-saga/effects';
-import { AUTHENTICATE_USER } from './constants';
+import { push } from 'react-router-redux';
+import { AUTHENTICATE_USER, AUTHENTICATE_USER_SUCCESS } from './constants';
 import { authenticateUserSuccess, authenticateUserFailure } from './actions';
 
 function* authenticateUserSaga() {
@@ -12,9 +13,14 @@ function* authenticateUserSaga() {
   }
 }
 
+function* authenticateUserSuccessSaga() {
+  yield put(push('/tickets'));
+}
+
 // Individual exports for testing
 export default function* defaultSaga() {
   yield [
     takeLatest(AUTHENTICATE_USER, authenticateUserSaga),
+    takeLatest(AUTHENTICATE_USER_SUCCESS, authenticateUserSuccessSaga),
   ];
 }
