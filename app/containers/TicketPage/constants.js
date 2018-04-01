@@ -4,4 +4,6 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/TicketPage/DEFAULT_ACTION';
+export const GET_TICKET = 'app/TicketPage/GET_TICKET';
+export const GET_TICKET_SUCCESS = 'app/TicketPage/GET_TICKET_SUCCESS';
+export const GET_TICKET_FAILURE = 'app/TicketPage/GET_TICKET_FAILURE';
