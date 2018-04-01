@@ -19,7 +19,7 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
 
   renderTicketRow(t) {
     return (
-      <TableRow key={t.id}>
+      <TableRow key={t.id} onClick={() => this.props.onClickRow(t.id)} hover>
         <TableCell>{t.title}</TableCell>
         <TableCell>{t.deviceId}</TableCell>
         {/* <TableCell>{t.device.model}</TableCell> */}
@@ -50,6 +50,7 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
 
 ClientTicketTable.propTypes = {
   tickets: PropTypes.array.isRequired,
+  onClickRow: PropTypes.func.isRequired,
 };
 
 export default ClientTicketTable;

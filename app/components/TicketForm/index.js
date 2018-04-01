@@ -63,7 +63,6 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" >Edit</Button></Grid></Grid>
           </Grid>
         </Card>
-
       </div>
     );
   }
