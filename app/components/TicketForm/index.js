@@ -5,8 +5,7 @@
 */
 
 import React from 'react';
-
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Card from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
@@ -26,6 +25,13 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
     super(props);
     this.state = {
     };
+    this.onRequestReplacement = this.onRequestReplacement.bind(this);
+  }
+
+  onRequestReplacement() {
+    this.props.onRequestReplacement({
+
+    });
   }
 
   render() {
@@ -67,7 +73,17 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
               <Typography variant="caption">Priority</Typography>
               <Typography variant="body1">High/Medium/Low</Typography>
             </Grid>
-            <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" >Edit</Button></Grid></Grid>
+            <Grid item xs={12} style={style.gridContainerChildBottom}>
+              <Grid container justify="center" alignItems="center" spacing={24}>
+                { /* TODO: check JWT to ensure user is agent before displaying */ }
+                <Grid item xs={2}>
+                  <Button variant="raised" color="primary">Edit</Button>
+                </Grid>
+                <Grid item xs={2}>
+                  <Button variant="raised" color="secondary" onClick={this.onRequestReplacement}>Replace Device</Button>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
         </Card>
 
@@ -77,6 +93,7 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
 }
 
 TicketForm.propTypes = {
+  onRequestReplacement: PropTypes.func.isRequired,
    // ticket: PropTypes.object.isRequired,
 };
 

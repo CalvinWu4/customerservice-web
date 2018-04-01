@@ -8,3 +8,5 @@ stats.json
 .DS_Store
 npm-debug.log
 .idea
+# It turns out that nobody needs somebody else's package lock file.
+package-lock.json

@@ -23,6 +23,8 @@ import reducer from './reducer';
 import saga from './saga';
 import style from './style';
 
+import { requestReplacement } from './actions';
+
 const fakeTicket = {
   title: 'Ticket Title Test',
 
@@ -33,7 +35,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
-        <TicketForm props={fakeTicket}></TicketForm>
+        <TicketForm props={fakeTicket} onRequestReplacement={(e) => this.props.requestReplacement(e)} />
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
@@ -44,7 +46,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 }
 
 TicketPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  requestReplacement: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -53,7 +55,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    requestReplacement: (e) => dispatch(requestReplacement(e)),
   };
 }
 

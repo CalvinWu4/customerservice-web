@@ -6,14 +6,14 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  REQUEST_REPLACEMENT_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({});
 
 function ticketPageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
+    case REQUEST_REPLACEMENT_SUCCESS:
       return state;
     default:
       return state;
