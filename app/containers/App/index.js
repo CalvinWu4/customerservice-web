@@ -30,7 +30,7 @@ export default function App() {
         <Route exact path="/" component={HomePage} />
         <Route exact path="/:userType/login" component={AgentLoginPage} />
         <Route exact path="/clients/register" component={ClientRegistrationPage} />
-        <Route exact path="/ticket/view" component={TicketPage} />
+        <Route exact path="/tickets/:ticketId" component={TicketPage} />
         <Route exact path="/tickets" component={TicketListPage} />
         <Route exact path="/ticket/create" component={NewTicketPage} />
         <Route component={NotFoundPage} />

@@ -23,19 +23,18 @@ import reducer from './reducer';
 import saga from './saga';
 import style from './style';
 
-import { requestReplacement } from './actions';
-
-const fakeTicket = {
-  title: 'Ticket Title Test',
-
-};
+import { requestReplacement, getTicket } from './actions';
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  componentDidMount() {
+    this.props.getTicket(this.props.match.params.ticketId);
+  }
+
   render() {
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
-        <TicketForm props={fakeTicket} onRequestReplacement={(e) => this.props.requestReplacement(e)} />
+        <TicketForm ticket={this.props.ticketpage.ticket} onRequestReplacement={(e) => this.props.requestReplacement(e)} ></TicketForm>
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
@@ -47,6 +46,9 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 
 TicketPage.propTypes = {
   requestReplacement: PropTypes.func.isRequired,
+  ticketpage: PropTypes.object.isRequired,
+  getTicket: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -56,6 +58,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     requestReplacement: (e) => dispatch(requestReplacement(e)),
+    getTicket: (ticketId) => dispatch(getTicket(ticketId)),
   };
 }
 
