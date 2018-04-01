@@ -55,7 +55,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
     if (!isEmailValid || !isPasswordValid) return;
 
     this.props.onLogin({
-      email: this.state.email.value,
+      username: this.state.email.value,
       password: this.state.password.value,
     });
   }
