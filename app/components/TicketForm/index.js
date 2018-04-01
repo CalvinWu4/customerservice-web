@@ -5,8 +5,7 @@
 */
 
 import React from 'react';
-
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Card from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
@@ -22,30 +21,24 @@ const divStyle = {
 
 
 class TicketForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  constructor(props) {
-    super(props);
-    this.state = {
-    };
-  }
-
   render() {
     return (
       <div style={divStyle} >
         <Card>
           <Grid container style={style.gridContainer}>
             <Grid item xs={12} container justify="center" style={style.gridContainerChild}>
-              <Typography variant="headline" component="h2" >Ticket Title</Typography>
+              <Typography variant="headline" component="h2" >{this.props.ticket.title}</Typography>
             </Grid>
             <Grid item xs={12} container justify="center" >
-              <Typography variant="headline" component="h3" >Status</Typography>
+              <Typography variant="headline" component="h3" >{this.props.ticket.status}</Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography variant="title">Issue Details:</Typography>
-              <Typography variant="body1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In aliquet purus a urna blandit, sed vestibulum purus ullamcorper. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Phasellus vitae varius ligula, non ornare dolor. Aenean euismod bibendum eros, vel maximus nulla rutrum a. Vivamus mattis vitae mauris vehicula semper. In suscipit eleifend elit, volutpat tempor nisl blandit a. Curabitur aliquet finibus mi quis molestie.</Typography>
+              <Typography variant="body1">{this.props.ticket.description}</Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title">Device Information</Typography>
-              <Typography variant="body1" >Model: </Typography>
+              <Typography variant="body1" >Model: X</Typography>
             </Grid>
             <Grid item xs={6} style={style.gridContainerChild}>
               <Typography variant="body1" >Serial No: </Typography>
@@ -61,9 +54,9 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
               <Typography variant="title" component="h3">Customer Support Agent: </Typography>
               <Typography variant="body1" component="p">Customer Support Agent</Typography>
               <Typography variant="caption">Date Opened</Typography>
-              <TextField type="date" disabled></TextField>
+              <TextField type="date" value={this.props.ticket.opened ? (new Date(this.props.ticket.opened)).toISOString().slice(0, 10) : ''} disabled></TextField>
               <Typography variant="caption">Date Closed</Typography>
-              <TextField type="date" disabled></TextField>
+              <TextField type="date" value={this.props.ticket.closed ? (new Date(this.props.ticket.closed)).toISOString().slice(0, 10) : ''} disabled></TextField>
               <Typography variant="caption">Priority</Typography>
               <Typography variant="body1">High/Medium/Low</Typography>
             </Grid>
@@ -77,7 +70,7 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
 }
 
 TicketForm.propTypes = {
-   // ticket: PropTypes.object.isRequired,
+  ticket: PropTypes.object,
 };
 
 export default TicketForm;

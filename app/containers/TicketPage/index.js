@@ -33,7 +33,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
-        <TicketForm props={this.props.ticketpage.ticket}></TicketForm>
+        <TicketForm ticket={this.props.ticketpage.ticket}></TicketForm>
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
