@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
@@ -24,8 +25,18 @@ import saga from './saga';
 import { getMyTickets } from './actions';
 
 export class TicketListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+
+    this.onClickRow = this.onClickRow.bind(this);
+  }
+
   componentDidMount() {
     this.props.getMyTickets();
+  }
+
+  onClickRow(id) {
+    this.props.redirectTo(`/tickets/${id}`);
   }
 
   render() {
@@ -37,7 +48,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
         <Grid item xs={8}>
           <Paper>
             {/* TODO: Select Agent/Client Ticket Table based on user's class in JWT */}
-            <ClientTicketTable tickets={this.props.ticketlistpage.tickets} />
+            <ClientTicketTable tickets={this.props.ticketlistpage.tickets} onClickRow={this.onClickRow} />
           </Paper>
         </Grid>
       </Grid>
@@ -48,6 +59,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
 TicketListPage.propTypes = {
   ticketlistpage: PropTypes.object.isRequired,
   getMyTickets: PropTypes.func.isRequired,
+  redirectTo: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -57,6 +69,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getMyTickets: () => dispatch(getMyTickets()),
+    redirectTo: (url) => dispatch(push(url)),
   };
 }
 
