@@ -19,3 +19,7 @@ export function authenticateUser(/* userData */) {
   // Stubbed to always return true for Release 2
   return true;
 }
+
+export function createTicket(ticket) {
+  return axios.post(`${domain}tickets`, ticket);
+}
