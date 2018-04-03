@@ -21,6 +21,23 @@ const divStyle = {
 
 
 class TicketForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+
+    this.renderDateClosed = this.renderDateClosed.bind(this);
+  }
+
+  renderDateClosed() {
+    if (!this.props.ticket.closed) return null;
+
+    return (
+      <span>
+        <Typography variant="caption">Date Closed</Typography>
+        <TextField type="date" value={this.props.ticket.closed ? (new Date(this.props.ticket.closed)).toISOString().slice(0, 10) : ''} disabled></TextField>
+      </span>
+    );
+  }
+
   render() {
     return (
       <div style={divStyle} >
@@ -51,12 +68,9 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
               <Typography variant="body1" component="p" >City, State, Zip</Typography>
             </Grid>
             <Grid item xs={6} style={style.gridContainerChildBottom}>
-              <Typography variant="title" component="h3">Customer Support Agent: </Typography>
-              <Typography variant="body1" component="p">Customer Support Agent</Typography>
               <Typography variant="caption">Date Opened</Typography>
               <TextField type="date" value={this.props.ticket.opened ? (new Date(this.props.ticket.opened)).toISOString().slice(0, 10) : ''} disabled></TextField>
-              <Typography variant="caption">Date Closed</Typography>
-              <TextField type="date" value={this.props.ticket.closed ? (new Date(this.props.ticket.closed)).toISOString().slice(0, 10) : ''} disabled></TextField>
+              {this.renderDateClosed()}
               <Typography variant="caption">Priority</Typography>
               <Typography variant="body1">{this.props.ticket.priority}</Typography>
             </Grid>

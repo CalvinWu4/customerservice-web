@@ -21,8 +21,7 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
     return (
       <TableRow key={t.id} onClick={() => this.props.onClickRow(t.id)} hover>
         <TableCell>{t.title}</TableCell>
-        <TableCell>{t.deviceId}</TableCell>
-        {/* <TableCell>{t.device.model}</TableCell> */}
+        <TableCell>{t.product ? t.product.name : ''}</TableCell>
         <TableCell>{new Date(t.opened).toDateString()}</TableCell>
         <TableCell>{t.status}</TableCell>
       </TableRow>
