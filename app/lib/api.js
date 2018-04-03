@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const domain = 'https://api-customerservice.azurewebsites.net/api/';
+// const domain = 'https://api-customerservice.azurewebsites.net/api/';
+const domain = 'http://localhost:9000/api/';
 
 export function getMyTickets() {
   return axios.get(`${domain}tickets`);

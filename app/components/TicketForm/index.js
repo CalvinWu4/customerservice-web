@@ -38,16 +38,16 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title">Device Information</Typography>
-              <Typography variant="body1" >Model: X</Typography>
+              <Typography variant="body1" >Name: {this.props.ticket.product ? this.props.ticket.product.name : ''}</Typography>
             </Grid>
             <Grid item xs={6} style={style.gridContainerChild}>
-              <Typography variant="body1" >Serial No: </Typography>
+              <Typography variant="body1" >Serial No: {this.props.ticket.product ? this.props.ticket.product.serialNumber : ''}</Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title" component="h3" style={style.gridContainerChildBottom} >Customer Information</Typography>
-              <Typography variant="body1" component="p" >First Name Last Name</Typography>
-              <Typography variant="body1" component="p" >Line 1 Address</Typography>
-              <Typography variant="body1" component="p" >Line 2 Address</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client ? `${this.props.ticket.client.firstName} ${this.props.ticket.client.lastName}` : ''} </Typography>
+              <Typography variant="body1" component="p" >309 rit street</Typography>
+              <Typography variant="body1" component="p" >Apt 1</Typography>
               <Typography variant="body1" component="p" >City, State, Zip</Typography>
             </Grid>
             <Grid item xs={6} style={style.gridContainerChildBottom}>
@@ -58,7 +58,7 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
               <Typography variant="caption">Date Closed</Typography>
               <TextField type="date" value={this.props.ticket.closed ? (new Date(this.props.ticket.closed)).toISOString().slice(0, 10) : ''} disabled></TextField>
               <Typography variant="caption">Priority</Typography>
-              <Typography variant="body1">High/Medium/Low</Typography>
+              <Typography variant="body1">{this.props.ticket.priority}</Typography>
             </Grid>
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" >Edit</Button></Grid></Grid>
           </Grid>
