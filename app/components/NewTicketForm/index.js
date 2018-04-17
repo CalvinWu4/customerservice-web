@@ -39,7 +39,7 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
         <Card>
           <Grid container >
             <Grid item xs={12} container justify="center" >
-              <TextField label="Ticket Title" name="title" value={this.setState.ticket.title}></TextField>
+              <TextField label="Ticket Title" name="title" ></TextField>
             </Grid>
             <Grid item xs={6} container justify="center">
               <Typography variant="title">Issue Details:</Typography>

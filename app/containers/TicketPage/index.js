@@ -14,15 +14,17 @@ import Typography from 'material-ui/Typography';
 import NewCommentForm from 'components/NewCommentForm';
 import TicketForm from 'components/TicketForm';
 import StoredCommentForm from 'components/StoredCommentForm';
+import { push } from 'react-router-redux';
 
-
+import { getTicket } from 'containers/Application/actions';
+import makeSelectApplication from 'containers/Application/selectors';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectTicketPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import style from './style';
-import { getTicket } from './actions';
+
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   componentDidMount() {
@@ -33,7 +35,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
-        <TicketForm ticket={this.props.ticketpage.ticket}></TicketForm>
+        <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)}></TicketForm>
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
@@ -44,18 +46,22 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 }
 
 TicketPage.propTypes = {
-  ticketpage: PropTypes.object.isRequired,
   getTicket: PropTypes.func.isRequired,
   match: PropTypes.object.isRequired,
+  goToEdit: PropTypes.func.isRequired,
+  application: PropTypes.object.isRequired,
 };
+
 
 const mapStateToProps = createStructuredSelector({
   ticketpage: makeSelectTicketPage(),
+  application: makeSelectApplication(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     getTicket: (ticketId) => dispatch(getTicket(ticketId)),
+    goToEdit: (path) => dispatch(push(path)),
   };
 }
 

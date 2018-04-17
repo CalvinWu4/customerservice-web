@@ -45,6 +45,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
         <Grid item xs={6}>
           <Typography variant="headline" color="primary" align="center">My Tickets</Typography>
         </Grid>
+        {/* TODO: Add a + button to link to the /ticket/create page */}
         <Grid item xs={8}>
           <Paper>
             {/* TODO: Select Agent/Client Ticket Table based on user's class in JWT */}
