@@ -6,7 +6,7 @@ export function getMyTickets() {
   return axios.get(`${domain}tickets`);
 }
 
-export function getTicket(id) {
+export function getTicketapi(id) {
   return axios.get(`${domain}tickets/${id}`);
 }
 
@@ -27,4 +27,8 @@ export function createTicket(ticket) {
 
 export function registerUser(clientData) {
   return axios.post(`${domain}clients`, clientData);
+}
+
+export function putTicketapi(ticket, ticketId) {
+  return axios.put(`${domain}tickets/${ticketId}`, ticket);
 }
