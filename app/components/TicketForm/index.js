@@ -38,21 +38,20 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title">Device Information</Typography>
-              <Typography variant="body1" >Model: X</Typography>
             </Grid>
             <Grid item xs={6} style={style.gridContainerChild}>
-              <Typography variant="body1" >Serial No: </Typography>
+              <Typography variant="body1" >Serial No: {this.props.ticket.productSerialNumber}</Typography>
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title" component="h3" style={style.gridContainerChildBottom} >Customer Information</Typography>
-              <Typography variant="body1" component="p" >First Name Last Name</Typography>
-              <Typography variant="body1" component="p" >Line 1 Address</Typography>
-              <Typography variant="body1" component="p" >Line 2 Address</Typography>
-              <Typography variant="body1" component="p" >City, State, Zip</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.firstName} {this.props.ticket.client.lastName}</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.address.line1}</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.address.line2}</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.address.city},{this.props.ticket.client.address.state}, {this.props.ticket.client.address.zipcode}</Typography>
             </Grid>
             <Grid item xs={6} style={style.gridContainerChildBottom}>
               <Typography variant="title" component="h3">Customer Support Agent: </Typography>
-              <Typography variant="body1" component="p">Customer Support Agent</Typography>
+              <Typography variant="body1" component="p">{this.props.ticket.agentId}</Typography>
               <Typography variant="caption">Date Opened</Typography>
               <TextField type="date" value={this.props.ticket.opened ? (new Date(this.props.ticket.opened)).toISOString().slice(0, 10) : ''} disabled></TextField>
               <Typography variant="caption">Date Closed</Typography>
@@ -62,6 +61,7 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
             </Grid>
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.props.redirectToEdit}>Edit</Button></Grid></Grid>
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.props.returnProduct}>Return Product</Button></Grid></Grid>
+            <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" >Close Ticket</Button></Grid></Grid>
           </Grid>
         </Card>
       </div>

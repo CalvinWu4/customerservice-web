@@ -13,14 +13,29 @@ const initialState = fromJS({
   token: '',
   ticket: {
     id: '',
-    status: '',
-    agentId: '',
-    deviceId: '',
     title: '',
     description: '',
+    status: '',
     opened: '',
     closed: '',
+    priority: '',
+    agentId: '',
+    productSerialNo: '',
+    client: {
+      id: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      address: {
+        line1: '',
+        line2: '',
+        city: '',
+        state: '',
+        zip: '',
+      },
+    },
   },
+
   account: {
     id: '',
     firstName: '',
