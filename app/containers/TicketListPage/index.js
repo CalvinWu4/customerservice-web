@@ -14,6 +14,7 @@ import { push } from 'react-router-redux';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 
 import ClientTicketTable from 'components/ClientTicketTable';
 
@@ -41,9 +42,12 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
 
   render() {
     return (
-      <Grid container alignItems="center" direction="row" justify="center" spacing={16} style={{ height: '100vh' }}>
+      <Grid container alignItems="center" direction="row" justify="center" spacing={16} style={{ height: '50vh' }}>
         <Grid item xs={6}>
           <Typography variant="headline" color="primary" align="center">My Tickets</Typography>
+        </Grid>
+        <Grid item xs={8}>
+          <Button variant="raised" color="primary" align="center" onClick={() => this.props.redirectTo('/ticket/create')}>Create a New Ticket</Button>
         </Grid>
         <Grid item xs={8}>
           <Paper>
