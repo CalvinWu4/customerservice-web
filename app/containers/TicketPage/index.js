@@ -16,7 +16,7 @@ import TicketForm from 'components/TicketForm';
 import StoredCommentForm from 'components/StoredCommentForm';
 import { push } from 'react-router-redux';
 
-import { getTicket } from 'containers/Application/actions';
+import { getTicket, postReturn } from 'containers/Application/actions';
 import makeSelectApplication from 'containers/Application/selectors';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -35,7 +35,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
-        <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)}></TicketForm>
+        <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)} returnProduct={() => this.props.returnDevice}></TicketForm>
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
@@ -50,6 +50,7 @@ TicketPage.propTypes = {
   match: PropTypes.object.isRequired,
   goToEdit: PropTypes.func.isRequired,
   application: PropTypes.object.isRequired,
+  returnDevice: PropTypes.func.isRequired,
 };
 
 
@@ -62,6 +63,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getTicket: (ticketId) => dispatch(getTicket(ticketId)),
     goToEdit: (path) => dispatch(push(path)),
+    returnDevice: (ticket, ticketId) => dispatch(postReturn(ticket, ticketId)),
   };
 }
 

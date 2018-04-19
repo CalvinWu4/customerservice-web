@@ -27,3 +27,7 @@ export function registerUser(clientData) {
 export function putTicketapi(ticket, ticketId) {
   return axios.put(`${domain}tickets/${ticketId}`, ticket);
 }
+
+export function returnProduct(ticket, ticketId) {
+  return axios.post(`${domain}tickets/${ticketId}/return`, ticket);
+}

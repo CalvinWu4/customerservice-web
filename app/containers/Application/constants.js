@@ -11,3 +11,7 @@ export const GET_TICKET_FAILURE = 'app/Application/GET_TICKET_FAILURE';
 export const PUT_TICKET = 'app/Application/PUT_TICKET';
 export const PUT_TICKET_SUCCESS = 'app/Application/PUT_TICKET_SUCCESS';
 export const PUT_TICKET_FAILURE = 'app/Application/PUT_TICKET_FAILURE';
+
+export const POST_RETURN = 'app/Application/POST_RETURN';
+export const POST_RETURN_SUCCESS = 'app/Application/POST_RETURN_SUCCESS';
+export const POST_RETURN_FAILURE = 'app/Application/POST_RETURN_FAILURE';
