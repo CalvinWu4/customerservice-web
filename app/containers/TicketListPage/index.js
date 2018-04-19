@@ -46,7 +46,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
         <Grid item xs={6}>
           <Typography variant="headline" color="primary" align="center">My Tickets</Typography>
         </Grid>
-        <Grid item xs={8}>
+        <Grid container justify="center">
           <Button variant="raised" color="primary" align="center" onClick={() => this.props.redirectTo('/ticket/create')}>Create a New Ticket</Button>
         </Grid>
         <Grid item xs={8}>
