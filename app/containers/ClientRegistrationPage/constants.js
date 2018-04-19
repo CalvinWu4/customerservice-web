@@ -4,4 +4,6 @@
  *
  */
 
-export const DEFAULT_ACTION = 'app/ClientRegistrationPage/DEFAULT_ACTION';
+export const REGISTER = 'app/ClientRegistrationPage/REGISTER';
+export const REGISTER_SUCCESS = 'app/ClientRegistrationPage/REGISTER_SUCCESS';
+export const REGISTER_FAILURE = 'app/ClientRegistrationPage/REGISTER_FAILURE';

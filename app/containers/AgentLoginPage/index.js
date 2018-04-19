@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import CenterGrid from 'components/CenterGrid';
 import LoginForm from 'components/LoginForm';
@@ -24,7 +25,7 @@ export class AgentLoginPage extends React.Component { // eslint-disable-line rea
   render() {
     return (
       <CenterGrid>
-        <LoginForm name="agent" onLogin={() => this.props.authenticateUser()} />
+        <LoginForm name={this.props.match.params.userType} onLogin={() => this.props.authenticateUser()} redirectToCreateAccount={() => this.props.redirectToCreateAccount()} />
       </CenterGrid>
     );
   }
@@ -32,6 +33,8 @@ export class AgentLoginPage extends React.Component { // eslint-disable-line rea
 
 AgentLoginPage.propTypes = {
   authenticateUser: PropTypes.func.isRequired,
+  redirectToCreateAccount: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -41,6 +44,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     authenticateUser: () => dispatch(authenticateUser()),
+    redirectToCreateAccount: () => dispatch(push('/clients/register')),
   };
 }
 

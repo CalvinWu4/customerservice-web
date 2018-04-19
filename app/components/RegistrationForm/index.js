@@ -73,10 +73,9 @@ class RegistrationForm extends React.Component { // eslint-disable-line react/pr
     if (!isEmailValid || !isPasswordValid || !isFirstNameValid || !isLastNameValid) return;
 
     this.props.onRegister({
-      firstName: this.state.firstName.value,
-      lastName: this.state.lastName.value,
-      email: this.state.email.value,
+      username: this.state.email.value,
       password: this.state.password.value,
+      type: 'customer',
     });
   }
 

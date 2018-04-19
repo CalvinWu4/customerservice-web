@@ -6,14 +6,14 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  REGISTER_SUCCESS,
 } from './constants';
 
 const initialState = fromJS({});
 
 function clientRegistrationPageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
+    case REGISTER_SUCCESS:
       return state;
     default:
       return state;

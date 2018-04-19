@@ -1,6 +1,19 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put } from 'redux-saga/effects';
+import { getTicket } from 'lib/api';
+import { GET_TICKET } from './constants';
+import { getTicketFailure, getTicketSuccess } from './actions';
 
-// Individual exports for testing
+function* getTicketSaga(action) {
+  try {
+    const { data } = yield call(getTicket, action.ticketId);
+    yield put(getTicketSuccess(data));
+  } catch (e) {
+    yield put(getTicketFailure(e));
+  }
+}
+
 export default function* defaultSaga() {
-  // See example in containers/HomePage/saga.js
+  yield [
+    takeLatest(GET_TICKET, getTicketSaga),
+  ];
 }
