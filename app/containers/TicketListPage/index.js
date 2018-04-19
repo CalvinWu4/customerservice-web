@@ -42,7 +42,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
 
   render() {
     return (
-      <Grid container alignItems="center" direction="row" justify="center" spacing={16} style={{ height: '50vh' }}>
+      <Grid container alignItems="center" direction="row" justify="center" spacing={16} style={{ height: '75vh' }}>
         <Grid item xs={6}>
           <Typography variant="headline" color="primary" align="center">My Tickets</Typography>
         </Grid>
