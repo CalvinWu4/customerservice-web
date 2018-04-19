@@ -25,35 +25,43 @@ const divStyle = {
 class EditTicketForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.setState = {
-      ticket: {
-        title: this.props.ticket.title,
-        status: this.props.ticket.status,
-        description: this.props.ticket.description,
-        priority: this.props.ticket.priority,
-      },
+    this.state = {
+      title: this.props.ticket.title,
+      status: this.props.ticket.status,
+      description: this.props.ticket.description,
+      priority: this.props.ticket.priority,
     };
+    this.onChange = this.onChange.bind(this);
+    this.onUpdate = this.onUpdate.bind(this);
   }
 
   onChange(e) {
     this.setState({
-      [e.target.name]: { ...this.state[e.target.name], value: e.target.value },
+      [e.target.name]: e.target.value,
     });
   }
+  onUpdate() {
+    this.props.onUpdate({
+      title: this.state.title,
+      description: this.state.description,
+      status: this.state.status,
+    });
+  }
+
   render() {
     return (
       <div style={divStyle} >
         <Card>
           <Grid container style={style.gridContainer}>
             <Grid item xs={12} container justify="center" style={style.gridContainerChild}>
-              <Typography variant="headline" component="h2" > {this.props.ticket.title} </Typography>
+              <Typography variant="headline" component="h2" > {this.state.title} </Typography>
             </Grid>
             <Grid item xs={12} container justify="center" >
-              <TextField variant="headline" component="h3" label="Status" value={this.props.ticket.status} />
+              <TextField variant="headline" component="h3" label="Status" name="status" onChange={this.onChange} value={this.state.status} />
             </Grid>
             <Grid item xs={12}>
               <Typography variant="title">Issue Details:</Typography>
-              <TextField variant="body1" value={this.props.ticket.description} />
+              <TextField variant="body1" name="description" onChange={this.onChange} value={this.state.description} />
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title">Device Information</Typography>
@@ -73,9 +81,9 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
               <Typography variant="title" component="h3">Customer Support Agent: </Typography>
               <Typography variant="body1" component="p">Customer Support Agent</Typography>
               <Typography variant="caption">Priority</Typography>
-              <TextField variant="body1" label="High/Medium/Low" value={this.props.ticket.priority} />
+              <TextField variant="body1" label="High/Medium/Low" value={this.state.priority} />
             </Grid>
-            <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.props.putTicket}>Save</Button></Grid></Grid>
+            <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.onUpdate}>Save</Button></Grid></Grid>
           </Grid>
         </Card>
       </div>
@@ -85,7 +93,7 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
 
 EditTicketForm.propTypes = {
   ticket: PropTypes.object,
-  putTicket: PropTypes.func,
+  onUpdate: PropTypes.func,
 };
 
 export default EditTicketForm;

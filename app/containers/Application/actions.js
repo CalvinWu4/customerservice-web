@@ -28,17 +28,17 @@ export function getTicketFailure(error) {
   };
 }
 
-export function putTicket(ticket) {
+export function putTicket(ticket, ticketId) {
   return {
     type: PUT_TICKET,
     ticket,
+    ticketId,
   };
 }
 
-export function putTicketSuccess(ticket) {
+export function putTicketSuccess() {
   return {
     type: PUT_TICKET_SUCCESS,
-    ticket,
   };
 }
 
