@@ -14,10 +14,11 @@ export function defaultAction() {
   };
 }
 
-export function createTicket(ticket) {
+export function createTicket(ticket, clientId) {
   return {
     type: CREATE_TICKET,
     ticket,
+    clientId,
   };
 }
 export function createTicketSuccess(ticket) {

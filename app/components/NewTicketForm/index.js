@@ -21,7 +21,7 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
     this.state = {
       title: '',
       description: '',
-      serialNo: '',
+      productSerialNumber: '',
       priority: '',
       status: '',
     };
@@ -37,9 +37,8 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
     this.props.onCreateTicket({
       title: this.state.title,
       description: this.state.description,
-      serialNo: this.state.serialNo,
+      productSerialNumber: this.state.productSerialNumber,
       status: this.state.status,
-      deviceId: this.state.deviceId,
     });
   }
   render() {
@@ -54,7 +53,7 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
               <TextField label="Details" name="description" onChange={this.onChange}></TextField>
             </Grid>
             <Grid item xs={4} container justify="center">
-              <TextField label="Serial No:" name="serialNo" onChange={this.onChange} type="number"></TextField>
+              <TextField label="Product Serial Number" name="productSerialNumber" onChange={this.onChange} ></TextField>
             </Grid>
             <Grid item xs={4} container justify="center">
               <TextField label="Priority" name="priority" onChange={this.onChange}></TextField>

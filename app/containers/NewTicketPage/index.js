@@ -17,7 +17,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectNewTicketPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-
+import { createTicket } from './actions';
 
 import NewTicketForm from '../../components/NewTicketForm';
 
@@ -35,18 +35,25 @@ const titleStyle = {
 };
 
 export class NewTicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.onCreateTicket = this.onCreateTicket.bind(this);
+  }
+  onCreateTicket(ticket) {
+    this.props.createTicket(ticket, 2);
+  }
   render() {
     return (
       <div style={divStyle}>
         <Typography variant="title" component="h2" style={titleStyle}>Create Ticket</Typography>
-        <NewTicketForm onCreateTicket={(e) => console.log(e)} />
+        <NewTicketForm onCreateTicket={this.onCreateTicket} />
       </div>
     );
   }
 }
 
 NewTicketPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  createTicket: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -55,6 +62,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    createTicket: (ticket, clientId) => dispatch(createTicket(ticket, clientId)),
     dispatch,
   };
 }

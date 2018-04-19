@@ -21,8 +21,8 @@ export function authenticateUser(/* userData */) {
 }
 
 
-export function createTicket(ticket) {
-  return axios.post(`${domain}tickets`, ticket);
+export function createTicket(ticket, clientId) {
+  return axios.post(`${domain}tickets?clientId=${clientId}`, ticket);
 }
 
 export function registerUser(clientData) {
