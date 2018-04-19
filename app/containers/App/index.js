@@ -21,6 +21,7 @@ import TicketPage from 'containers/TicketPage';
 import ClientRegistrationPage from 'containers/ClientRegistrationPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NewTicketPage from 'containers/NewTicketPage/Loadable';
+import ReviewPage from 'containers/ReviewPage';
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         <Route exact path="/tickets/:ticketId" component={TicketPage} />
         <Route exact path="/tickets" component={TicketListPage} />
         <Route exact path="/ticket/create" component={NewTicketPage} />
+        <Route exact path="/ticket/review/:ticketId" component={ReviewPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>
