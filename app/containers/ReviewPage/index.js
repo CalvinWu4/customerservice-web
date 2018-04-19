@@ -19,7 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 
-import ReviewForm from '../../components/ReviewPage';
+import ReviewForm from '../../components/ReviewPage/Loadable';
 
 
 const divStyle = {
@@ -50,7 +50,7 @@ ReviewPage.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  newticketpage: makeSelectReviewPage(),
+ reviewpage: makeSelectReviewPage(),
 });
 
 function mapDispatchToProps(dispatch) {
