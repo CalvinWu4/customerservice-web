@@ -5,9 +5,11 @@
 */
 
 import React from 'react';
+
+import PropTypes from 'prop-types';
+
 // import styled from 'styled-components';
 import Card from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
@@ -16,40 +18,47 @@ import Grid from 'material-ui/Grid';
 class NewTicketForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.setState = {
-      ticket: {
-        title: '',
-        description: '',
-        priority: '',
-        status: 'new',
-      },
+    this.state = {
+      title: '',
+      description: '',
+      productSerialNumber: '',
+      priority: '',
+      status: '',
     };
+    this.onChange = this.onChange.bind(this);
+    this.onCreateTicket = this.onCreateTicket.bind(this);
   }
   onChange(e) {
     this.setState({
-      [e.target.name]: { ...this.state[e.target.name], value: e.target.value },
+      [e.target.name]: e.target.value,
     });
   }
-  /*
-   * Need to automate the setting of the open date and the setting of a customer support agent, getting customer information
-   */
+  onCreateTicket() {
+    this.props.onCreateTicket({
+      title: this.state.title,
+      description: this.state.description,
+      productSerialNumber: this.state.productSerialNumber,
+      status: this.state.status,
+    });
+  }
   render() {
     return (
       <div>
         <Card>
           <Grid container >
             <Grid item xs={12} container justify="center" >
-              <TextField label="Ticket Title" name="title" ></TextField>
+              <TextField label="Ticket Title" name="title" onChange={this.onChange}></TextField>
             </Grid>
-            <Grid item xs={6} container justify="center">
-              <Typography variant="title">Issue Details:</Typography>
-              <TextField label="Details" name="description"></TextField>
+            <Grid item xs={4} container justify="center">
+              <TextField label="Details" name="description" onChange={this.onChange}></TextField>
             </Grid>
-            <Grid item xs={6} container justify="center">
-              <Typography variant="title">Priority</Typography>
-              <TextField label="High/Medium/Low" name="priority"></TextField>
+            <Grid item xs={4} container justify="center">
+              <TextField label="Product Serial Number" name="productSerialNumber" onChange={this.onChange} ></TextField>
             </Grid>
-            <Grid item xs={12} ><Grid container justify="center"><Button variant="raised" color="primary" >Submit</Button></Grid></Grid>
+            <Grid item xs={4} container justify="center">
+              <TextField label="Priority" name="priority" onChange={this.onChange}></TextField>
+            </Grid>
+            <Grid item xs={12} ><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.onCreateTicket} >Submit</Button></Grid></Grid>
           </Grid>
         </Card>
       </div>
@@ -58,7 +67,7 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
 }
 
 NewTicketForm.propTypes = {
-
+  onCreateTicket: PropTypes.func.isRequired,
 };
 
 export default NewTicketForm;
