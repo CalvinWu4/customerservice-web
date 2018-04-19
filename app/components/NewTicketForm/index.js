@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 
 // import styled from 'styled-components';
 import Card from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
@@ -54,11 +53,10 @@ class NewTicketForm extends React.Component { // eslint-disable-line react/prefe
               <TextField label="Details" name="description" onChange={this.onChange}></TextField>
             </Grid>
             <Grid item xs={4} container justify="center">
-              <TextField label="Device ID:" name="deviceId" onChange={this.onChange} type="number"></TextField>
+              <TextField label="Serial No:" name="deviceId" onChange={this.onChange} type="number"></TextField>
             </Grid>
             <Grid item xs={4} container justify="center">
-              <Typography variant="title">Priority</Typography>
-              <TextField label="High/Medium/Low" name="priority" onChange={this.onChange}></TextField>
+              <TextField label="Priority" name="priority" onChange={this.onChange}></TextField>
             </Grid>
             <Grid item xs={12} ><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.onCreateTicket} >Submit</Button></Grid></Grid>
           </Grid>
