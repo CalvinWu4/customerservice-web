@@ -19,7 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 
 
-import ReviewForm from '../../components/ReviewPage/Loadable';
+import ReviewForm from '../../components/ReviewForm';
 
 
 const divStyle = {

@@ -21,9 +21,7 @@ import TicketPage from 'containers/TicketPage';
 import ClientRegistrationPage from 'containers/ClientRegistrationPage';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import NewTicketPage from 'containers/NewTicketPage/Loadable';
-import ReviewPage from 'containers/ReviewPage/Loadable';
-
-
+import ReviewPage from 'containers/ReviewPage';
 
 
 export default function App() {
