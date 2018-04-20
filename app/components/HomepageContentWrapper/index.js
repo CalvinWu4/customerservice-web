@@ -46,8 +46,8 @@ class HomepageContentWrapper extends React.Component { // eslint-disable-line re
           <Segment inverted textAlign='center' style={{ minHeight: 700, paddingTop: '0px', paddingBottom: '0px' }} vertical>
             <div style={{ width: '100%', height: '100vh' }} className='freshColorAnimiation'>
               <Menu inverted={!fixed} pointing={!fixed} secondary={!fixed} size='large' style={{ borderBottom: '0px', borderTop: '0px' }}>
-                <Container style={{ marginTop: '10px' }}>
-                  <Menu.Item active>Customer Support</Menu.Item>
+                <Container style={{ marginTop: '0px' }}>
+                  <Menu.Item active disabled>Customer Support</Menu.Item>
                   <Menu.Item position='right'>
                     <Button as='a' inverted={!fixed} onClick={this.props.goLogin}>Log in</Button>
                     <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>Sign Up</Button>
