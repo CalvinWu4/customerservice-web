@@ -1,6 +1,0 @@
-/*
- *
- * TicketPage constants
- *
- */
-

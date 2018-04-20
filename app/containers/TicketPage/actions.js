@@ -1,5 +1,0 @@
-/*
- *
- * TicketPage actions
- *
- */
