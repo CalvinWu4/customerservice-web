@@ -49,13 +49,13 @@ class HomepageContentWrapper extends React.Component { // eslint-disable-line re
                 <Container style={{ marginTop: '10px' }}>
                   <Menu.Item active>Customer Support</Menu.Item>
                   <Menu.Item position='right'>
-                    <Button as='a' inverted={!fixed}>Log in</Button>
+                    <Button as='a' inverted={!fixed} onClick={this.props.goLogin}>Log in</Button>
                     <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>Sign Up</Button>
                   </Menu.Item>
                 </Container>
               </Menu>
               <div style={{ paddingTop: '5%' }}>
-                <HomepageHeading />
+                <HomepageHeading goLogin={this.props.goLogin} />
               </div>
             </div>
           </Segment>
@@ -68,6 +68,7 @@ class HomepageContentWrapper extends React.Component { // eslint-disable-line re
 
 HomepageContentWrapper.propTypes = {
   children: propTypes.node,
+  goLogin: propTypes.func.isRequired,
 };
 
 export default HomepageContentWrapper;

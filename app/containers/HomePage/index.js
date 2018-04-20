@@ -10,16 +10,37 @@
  */
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import HomepageContentWrapper from 'components/HomepageContentWrapper';
 import HomepageLayout from 'components/HomepageLayout';
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <HomepageContentWrapper>
-        <HomepageLayout />
+      <HomepageContentWrapper goLogin={() => this.props.redirectTo('/login')}>
+        <HomepageLayout goLogin={() => this.props.redirectTo('/login')} />
       </HomepageContentWrapper>
     );
   }
 }
+
+HomePage.propTypes = {
+  redirectTo: PropTypes.func.isRequired,
+};
+
+
+function mapDispatchToProps(dispatch) {
+  return {
+    redirectTo: (url) => dispatch(push(url)),
+  };
+}
+
+const withConnect = connect(null, mapDispatchToProps);
+
+export default compose(
+  withConnect,
+)(HomePage);
