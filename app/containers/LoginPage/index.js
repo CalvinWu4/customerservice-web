@@ -8,25 +8,29 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
+import LoginContentWrapper from 'components/LoginContentWrapper';
 import LoginForm from 'components/LoginForm';
 
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <LoginForm onLogin={(e) => console.log(e)} />
+      <LoginContentWrapper goHome={() => this.props.redirectTo('/')}>
+        <LoginForm onLogin={(e) => console.log(e)} />
+      </LoginContentWrapper>
     );
   }
 }
 
 LoginPage.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  redirectTo: PropTypes.func.isRequired,
 };
 
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch,
+    redirectTo: (url) => dispatch(push(url)),
   };
 }
 

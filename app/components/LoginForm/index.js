@@ -78,16 +78,16 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
             height: 100%;
           }
         `}</style>
-        <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+        <Grid textAlign='center' style={{ marginTop: '15%' }} verticalAlign='middle'>
           <Grid.Column style={{ maxWidth: 450 }}>
-            <Header as='h2' color='red' textAlign='center'>
+            <Header as='h1' color='black' style={{ fontSize: '2.5em' }} textAlign='center'>
               Login to your account
             </Header>
             <Form size='large' onSubmit={this.onSubmitForm}>
               <Segment stacked>
                 <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' name='email' value={this.state.email.value} onChange={this.onChange} error={this.state.email.hasError} />
                 <Form.Input fluid icon='lock' iconPosition='left' placeholder='Password' type='password' name='password' value={this.state.password.value} onChange={this.onChange} error={this.state.password.hasError} />
-                <Button color='red' fluid size='large'>Login</Button>
+                <Button color='orange' fluid size='large'>Login</Button>
               </Segment>
             </Form>
             <Message>
