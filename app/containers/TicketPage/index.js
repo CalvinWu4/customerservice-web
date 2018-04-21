@@ -30,6 +30,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
   constructor(props) {
     super(props);
     this.closingTicket = this.closingTicket.bind(this);
+    this.returnProduct = this.returnProduct.bind(this);
   }
   componentDidMount() {
     this.props.getTicket(this.props.match.params.ticketId);
@@ -38,11 +39,15 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     this.props.closingTicket(ticket, this.props.match.params.ticketId);
     this.props.goToEdit('/tickets');
   }
+  returnProduct(ticket) {
+    this.props.returnDevice(ticket, this.props.match.params.ticketId);
+    this.props.goToEdit('/tickets');
+  }
   render() {
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
-        <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)} returnProduct={() => this.props.returnDevice} closeTicket={this.closingTicket} />
+        <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)} returnProduct={this.returnProduct} closeTicket={this.closingTicket} />
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
