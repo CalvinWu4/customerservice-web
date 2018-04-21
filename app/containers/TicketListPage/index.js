@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
+import makeSelectApplication from 'containers/Application/selectors';
 import NavigationBar from 'components/NavigationBar';
 import CreateTicketByAgentModal from 'components/CreateTicketByAgentModal';
 
@@ -82,7 +83,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
   render() {
     return (
       <div style={{ width: '100%', height: '100vh' }}>
-        <CreateTicketByAgentModal open={this.state.isCreateTicketByAgentModalOpen} onCancel={this.closeCreateTicketByAgentModal} onCreate={(e) => console.log(e)} />
+        <CreateTicketByAgentModal open={this.state.isCreateTicketByAgentModalOpen} onCancel={this.closeCreateTicketByAgentModal} onCreate={(e) => console.log(e)} clients={this.props.application.clients} />
         <NavigationBar redirectTo={this.props.redirectTo}>
           <Grid>
             <Grid.Row>
@@ -134,11 +135,13 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
 
 TicketListPage.propTypes = {
   redirectTo: PropTypes.func.isRequired,
+  application: PropTypes.object.isRequired,
   ticketlistpage: PropTypes.object.isRequired,
   getTicketList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
+  application: makeSelectApplication(),
   ticketlistpage: makeSelectTicketListPage(),
 });
 

@@ -7,7 +7,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, Button, Form, Input } from 'semantic-ui-react';
+import { Modal, Button, Form, Input, Select } from 'semantic-ui-react';
 
 
 class CreateTicketByAgentModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -22,6 +22,7 @@ class CreateTicketByAgentModal extends React.Component { // eslint-disable-line 
     };
 
     this.validateForm = this.validateForm.bind(this);
+    this.clientToOption = this.clientToOption.bind(this);
 
     this.onChange = this.onChange.bind(this);
     this.onCreate = this.onCreate.bind(this);
@@ -61,6 +62,10 @@ class CreateTicketByAgentModal extends React.Component { // eslint-disable-line 
     return isValid;
   }
 
+  clientToOption(client) {
+    return { key: client.id, value: client.id, text: `${client.firstName} ${client.lastName}` };
+  }
+
   render() {
     const { title, productSerialNumber, clientId, description } = this.state;
     return (
@@ -73,7 +78,7 @@ class CreateTicketByAgentModal extends React.Component { // eslint-disable-line 
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.Input control={Input} label='Product serial number' name='productSerialNumber' onChange={this.onChange} value={productSerialNumber.value} error={productSerialNumber.hasError} required />
-              <Form.Input control={Input} label='Client' name='clientId' onChange={this.onChange} value={clientId.value} error={clientId.hasError} required />
+              <Form.Field control={Select} label='Client' name='clientId' onChange={this.onChange} value={clientId.value} error={clientId.hasError} options={this.props.clients.map(this.clientToOption)} required />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.TextArea label='Description' name='description' onChange={this.onChange} value={description.value} />
@@ -93,6 +98,7 @@ CreateTicketByAgentModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCreate: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
+  clients: PropTypes.array.isRequired,
 };
 
 export default CreateTicketByAgentModal;
