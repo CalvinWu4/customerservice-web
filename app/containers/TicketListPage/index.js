@@ -20,8 +20,45 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectTicketListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { getTickets } from './actions';
 
 export class TicketListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+
+    this.ticketRow = this.ticketRow.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.getTicketList();
+  }
+
+  ticketRow(ticket) {
+    let color = 'blue';
+
+    switch (ticket.status) {
+      case 'new':
+        color = 'green';
+        break;
+      case 'in-progress':
+        color = 'yellow';
+        break;
+      case 'done':
+        color = 'red';
+        break;
+      default:
+        break;
+    }
+
+    return (
+      <Table.Row key={`containers_ticketlistpage_ticket_${ticket.id}`}>
+        <Table.Cell>{ ticket.title }</Table.Cell>
+        <Table.Cell>{ `${ticket.client.firstName} ${ticket.client.lastName}` }</Table.Cell>
+        <Table.Cell><Label color={color} content={ticket.status} /></Table.Cell>
+      </Table.Row>
+    );
+  }
+
   render() {
     return (
       <div style={{ width: '100%', height: '100vh' }}>
@@ -62,21 +99,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    <Table.Row>
-                      <Table.Cell>My watch screen is not working</Table.Cell>
-                      <Table.Cell>John Doe</Table.Cell>
-                      <Table.Cell><Label color='yellow' content='In-progress' /></Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Cell>Is there a way to upgrade to the model X watch from model T?</Table.Cell>
-                      <Table.Cell>Steven Ho</Table.Cell>
-                      <Table.Cell><Label color='green' content='New' /></Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Cell>I do not like the color of my watch, money back?</Table.Cell>
-                      <Table.Cell>Vladimir Putin</Table.Cell>
-                      <Table.Cell><Label color='red' content='Closed' /></Table.Cell>
-                    </Table.Row>
+                    {this.props.ticketlistpage.tickets.map(this.ticketRow)}
                   </Table.Body>
                 </Table>
               </Grid.Column>
@@ -90,6 +113,8 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
 
 TicketListPage.propTypes = {
   redirectTo: PropTypes.func.isRequired,
+  ticketlistpage: PropTypes.object.isRequired,
+  getTicketList: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -99,6 +124,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     redirectTo: (url) => dispatch(push(url)),
+    getTicketList: () => dispatch(getTickets()),
   };
 }
 

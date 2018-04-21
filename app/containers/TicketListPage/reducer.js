@@ -6,15 +6,17 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION,
+  GET_TICKETS_SUCCEDED,
 } from './constants';
 
-const initialState = fromJS({});
+const initialState = fromJS({
+  tickets: [],
+});
 
 function ticketListPageReducer(state = initialState, action) {
   switch (action.type) {
-    case DEFAULT_ACTION:
-      return state;
+    case GET_TICKETS_SUCCEDED:
+      return state.set('tickets', fromJS(action.tickets));
     default:
       return state;
   }
