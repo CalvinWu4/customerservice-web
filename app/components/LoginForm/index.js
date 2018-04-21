@@ -91,7 +91,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
               </Segment>
             </Form>
             <Message>
-              New customer? <a>Sign Up</a>
+              New customer? <a role='presentation' onClick={this.props.goLogin} style={{ cursor: 'pointer' }}>Sign Up</a>
             </Message>
           </Grid.Column>
         </Grid>
@@ -102,6 +102,7 @@ class LoginForm extends React.Component { // eslint-disable-line react/prefer-st
 
 LoginForm.propTypes = {
   onLogin: PropTypes.func.isRequired,
+  goLogin: PropTypes.func.isRequired,
 };
 
 export default LoginForm;

@@ -17,7 +17,7 @@ export class LoginPage extends React.Component { // eslint-disable-line react/pr
   render() {
     return (
       <LoginContentWrapper goHome={() => this.props.redirectTo('/')} goSignup={() => this.props.redirectTo('/signup')}>
-        <LoginForm onLogin={(e) => console.log(e)} />
+        <LoginForm onLogin={(e) => console.log(e)} goLogin={() => this.props.redirectTo('/signup')} />
       </LoginContentWrapper>
     );
   }
