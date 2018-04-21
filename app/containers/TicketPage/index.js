@@ -27,19 +27,22 @@ import style from './style';
 
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.closingTicket = this.closingTicket.bind(this);
+  }
   componentDidMount() {
     this.props.getTicket(this.props.match.params.ticketId);
   }
   closingTicket(ticket) {
-    console.log(ticket);
-    console.log('Closing Ticket in TicketPage');
-    this.props.putTicket(ticket, this.props.match.params.ticketId);
+    this.props.closingTicket(ticket, this.props.match.params.ticketId);
+    this.props.goToEdit('/tickets');
   }
   render() {
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
-        <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)} returnProduct={() => this.props.returnDevice} closeTicket={() => this.closingTicket} />
+        <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)} returnProduct={() => this.props.returnDevice} closeTicket={this.closingTicket} />
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
@@ -55,7 +58,7 @@ TicketPage.propTypes = {
   goToEdit: PropTypes.func.isRequired,
   application: PropTypes.object.isRequired,
   returnDevice: PropTypes.func.isRequired,
-  putTicket: PropTypes.func,
+  closingTicket: PropTypes.func,
 };
 
 

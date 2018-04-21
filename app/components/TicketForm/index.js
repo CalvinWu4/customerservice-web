@@ -23,22 +23,17 @@ const divStyle = {
 class TicketForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-    this.state = {
-      title: this.props.ticket.title,
-      status: this.props.ticket.status,
-      description: this.props.ticket.description,
-      priority: this.props.ticket.priority,
-      productSerialNumber: this.props.ticket.productSerialNumber,
-    };
     this.closeTicket = this.closeTicket.bind(this);
   }
+
+
   closeTicket() {
-    this.setState.ticket.title = this.props.ticket.title;
-    this.setState.ticket.status = 'closed';
-    this.setState.ticket.description = this.props.ticket.description;
-    this.setState.ticket.productSerialNumber = this.props.ticket.productSerialNumber;
-    console.log(this.state);
-    this.props.closeTicket(this.state);
+    this.props.closeTicket({
+      title: this.props.ticket.title,
+      status: 'closed',
+      description: this.props.ticket.description,
+      productSerialNumber: this.props.ticket.productSerialNumber,
+    });
   }
   render() {
     return (
