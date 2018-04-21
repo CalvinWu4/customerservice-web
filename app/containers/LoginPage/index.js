@@ -16,7 +16,7 @@ import LoginForm from 'components/LoginForm';
 export class LoginPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <LoginContentWrapper goHome={() => this.props.redirectTo('/')}>
+      <LoginContentWrapper goHome={() => this.props.redirectTo('/')} goSignup={() => this.props.redirectTo('/signup')}>
         <LoginForm onLogin={(e) => console.log(e)} />
       </LoginContentWrapper>
     );

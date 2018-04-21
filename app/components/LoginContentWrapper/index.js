@@ -22,7 +22,7 @@ class LoginContentWrapper extends React.Component { // eslint-disable-line react
           <Container>
             <Menu.Item style={{ fontFamily: 'aileronbold_italic', fontSize: '1.2em' }} onClick={this.props.goHome}><Icon name='angle left' style={{ marginRight: '0px', paddingRight: '0px' }} />KennUWare</Menu.Item>
             <Menu.Item position='right'>
-              <Button as='a' inverted>Sign up</Button>
+              <Button as='a' onClick={this.props.goSignup} inverted>Sign up</Button>
             </Menu.Item>
           </Container>
         </Menu>
@@ -35,6 +35,7 @@ class LoginContentWrapper extends React.Component { // eslint-disable-line react
 LoginContentWrapper.propTypes = {
   children: PropTypes.node,
   goHome: PropTypes.func.isRequired,
+  goSignup: PropTypes.func.isRequired,
 };
 
 export default LoginContentWrapper;

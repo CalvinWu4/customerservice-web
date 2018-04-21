@@ -267,7 +267,9 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
   render() {
     return (
       <div style={{ marginTop: '10%' }}>
-        <Header as='h1'>Create account</Header>
+        <Header as='h1' color='black' style={{ fontSize: '2.5em' }} textAlign='center'>
+          Create account
+        </Header>
         <Step.Group attached='top' stackable='tablet'>
           <Step active={this.state.currentStep === 'account'}>
             <Icon name='user' />

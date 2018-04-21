@@ -5,7 +5,7 @@
 */
 
 import React from 'react';
-import propTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import HomepageHeading from 'components/HomepageHeading';
 
@@ -50,12 +50,12 @@ class HomepageContentWrapper extends React.Component { // eslint-disable-line re
                   <Menu.Item active disabled>Customer Support</Menu.Item>
                   <Menu.Item position='right'>
                     <Button as='a' inverted={!fixed} onClick={this.props.goLogin}>Log in</Button>
-                    <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>Sign Up</Button>
+                    <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }} onClick={this.props.goSignup}>Sign Up</Button>
                   </Menu.Item>
                 </Container>
               </Menu>
               <div style={{ paddingTop: '5%' }}>
-                <HomepageHeading goLogin={this.props.goLogin} />
+                <HomepageHeading goLogin={this.props.goLogin} goSignup={this.props.goSignup} />
               </div>
             </div>
           </Segment>
@@ -67,8 +67,9 @@ class HomepageContentWrapper extends React.Component { // eslint-disable-line re
 }
 
 HomepageContentWrapper.propTypes = {
-  children: propTypes.node,
-  goLogin: propTypes.func.isRequired,
+  children: PropTypes.node,
+  goLogin: PropTypes.func.isRequired,
+  goSignup: PropTypes.func.isRequired,
 };
 
 export default HomepageContentWrapper;

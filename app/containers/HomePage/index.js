@@ -21,8 +21,8 @@ import HomepageLayout from 'components/HomepageLayout';
 export class HomePage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
     return (
-      <HomepageContentWrapper goLogin={() => this.props.redirectTo('/login')}>
-        <HomepageLayout goLogin={() => this.props.redirectTo('/login')} />
+      <HomepageContentWrapper goLogin={() => this.props.redirectTo('/login')} goSignup={() => this.props.redirectTo('/signup')} >
+        <HomepageLayout />
       </HomepageContentWrapper>
     );
   }
