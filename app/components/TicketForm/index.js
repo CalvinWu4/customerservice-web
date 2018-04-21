@@ -21,6 +21,25 @@ const divStyle = {
 
 
 class TicketForm extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+    this.state = {
+      title: this.props.ticket.title,
+      status: this.props.ticket.status,
+      description: this.props.ticket.description,
+      priority: this.props.ticket.priority,
+      productSerialNumber: this.props.ticket.productSerialNumber,
+    };
+    this.closeTicket = this.closeTicket.bind(this);
+  }
+  closeTicket() {
+    this.setState.ticket.title = this.props.ticket.title;
+    this.setState.ticket.status = 'closed';
+    this.setState.ticket.description = this.props.ticket.description;
+    this.setState.ticket.productSerialNumber = this.props.ticket.productSerialNumber;
+    console.log(this.state);
+    this.props.closeTicket(this.state);
+  }
   render() {
     return (
       <div style={divStyle} >
@@ -61,7 +80,7 @@ class TicketForm extends React.Component { // eslint-disable-line react/prefer-s
             </Grid>
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.props.redirectToEdit}>Edit</Button></Grid></Grid>
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.props.returnProduct}>Return Product</Button></Grid></Grid>
-            <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" >Close Ticket</Button></Grid></Grid>
+            <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.closeTicket}>Close Ticket</Button></Grid></Grid>
           </Grid>
         </Card>
       </div>
@@ -73,6 +92,7 @@ TicketForm.propTypes = {
   ticket: PropTypes.object,
   redirectToEdit: PropTypes.func,
   returnProduct: PropTypes.func,
+  closeTicket: PropTypes.func,
 };
 
 export default TicketForm;

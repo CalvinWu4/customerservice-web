@@ -72,14 +72,14 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title" component="h3" style={style.gridContainerChildBottom} >Customer Information</Typography>
-              <Typography variant="body1" component="p" >First Name Last Name</Typography>
-              <Typography variant="body1" component="p" >Line 1 Address</Typography>
-              <Typography variant="body1" component="p" >Line 2 Address</Typography>
-              <Typography variant="body1" component="p" >City, State, Zip</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.firstName} {this.props.ticket.client.lastName}</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.address.line1}</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.address.line2}</Typography>
+              <Typography variant="body1" component="p" >{this.props.ticket.client.address.city}, {this.props.ticket.client.address.state}, {this.props.ticket.client.address.zip}</Typography>
             </Grid>
             <Grid item xs={6} style={style.gridContainerChildBottom}>
               <Typography variant="title" component="h3">Customer Support Agent: </Typography>
-              <Typography variant="body1" component="p">Customer Support Agent</Typography>
+              <Typography variant="body1" component="p">{this.props.ticket.agentId}</Typography>
               <Typography variant="caption">Priority</Typography>
               <TextField variant="body1" label="High/Medium/Low" value={this.state.priority} />
             </Grid>

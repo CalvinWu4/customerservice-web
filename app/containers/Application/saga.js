@@ -15,6 +15,7 @@ function* getTicketSaga(action) {
 
 function* putTicketSaga(action) {
   try {
+    console.log(action.ticket);
     yield call(putTicketapi, action.ticket, action.ticketId);
     yield put(getTicket(action.ticketId));
   } catch (e) {
