@@ -5,6 +5,7 @@
 */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Step, Icon, Segment, Button, Form, Input, Header, Popup, Grid, List } from 'semantic-ui-react';
 import { isEmail } from 'validator';
@@ -31,7 +32,7 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
         city: { value: '', hasError: false },
         state: { value: '', hasError: false },
         zipcode: { value: '', hasError: false },
-        country: { value: 'usa', hasError: false },
+        country: { value: 'USA', hasError: false },
       },
     };
 
@@ -47,6 +48,26 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
     this.renderStepForm = this.renderStepForm.bind(this);
     this.goBack = this.goBack.bind(this);
     this.goNext = this.goNext.bind(this);
+    this.onSignup = this.onSignup.bind(this);
+  }
+
+  onSignup() {
+    const { accountInfo, address } = this.state;
+
+    this.props.onSignup({
+      firstName: accountInfo.firstName.value,
+      lastName: accountInfo.lastName.value,
+      email: accountInfo.email.value,
+      password: accountInfo.password.value,
+      address: {
+        line1: address.line1.value,
+        line2: address.line2.value,
+        city: address.city.value,
+        state: address.state.value,
+        zipcode: address.zipcode.value,
+        country: address.country.value,
+      },
+    });
   }
 
   accountInfoFormVerification() {
@@ -273,7 +294,7 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
         <Segment attached>
           { this.renderStepForm() }
         </Segment>
-        { this.state.currentStep === 'verification' ? (<Button style={{ float: 'right', marginTop: '5px', marginRight: '0px' }} color='orange'>Signup</Button>) : null }
+        { this.state.currentStep === 'verification' ? (<Button style={{ float: 'right', marginTop: '5px', marginRight: '0px' }} color='orange' onClick={this.onSignup}>Signup</Button>) : null }
         { this.state.currentStep !== 'verification' ? (<Button style={{ float: 'right', marginTop: '5px', marginRight: '0px' }} onClick={this.goNext} color='blue'>Next</Button>) : null }
         { this.state.currentStep !== 'account' ? (<Button style={{ float: 'right', marginTop: '5px', marginRight: '5px' }} onClick={this.goBack}>Back</Button>) : null }
       </div>
@@ -282,7 +303,7 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
 }
 
 SignupForm.propTypes = {
-
+  onSignup: PropTypes.func.isRequired,
 };
 
 export default SignupForm;

@@ -28,7 +28,7 @@ export class SignupPage extends React.Component { // eslint-disable-line react/p
       <SignupContentWrapper goHome={() => this.props.redirectTo('/')} goLogin={() => this.props.redirectTo('/login')}>
         <Grid centered>
           <Grid.Row>
-            <SignupForm />
+            <SignupForm onSignup={(e) => console.log(e)} />
           </Grid.Row>
         </Grid>
       </SignupContentWrapper>
