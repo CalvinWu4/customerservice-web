@@ -25,11 +25,21 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
         password: { value: '', hasError: false },
         repeatPassword: { value: '', hasError: false },
       },
+      address: {
+        line1: { value: '', hasError: false },
+        line2: { value: '', hasError: false },
+        city: { value: '', hasError: false },
+        state: { value: '', hasError: false },
+        zipcode: { value: '', hasError: false },
+        country: { value: 'usa', hasError: false },
+      },
     };
 
     this.accountInfoFormVerification = this.accountInfoFormVerification.bind(this);
+    this.addressFormVerification = this.addressFormVerification.bind(this);
 
     this.handleAccountInfoForm = this.handleAccountInfoForm.bind(this);
+    this.handeAddressForm = this.handeAddressForm.bind(this);
 
     this.accountInfoForm = this.accountInfoForm.bind(this);
     this.addressForm = this.addressForm.bind(this);
@@ -58,10 +68,36 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
     return isValid;
   }
 
+  addressFormVerification() {
+    const { line1, city, state, zipcode } = this.state.address;
+
+    const isLine1Valid = line1.value.length > 0;
+    const isCityValid = city.value.length > 0;
+    const isStateValid = state.value.length > 0;
+    const isZipcodeValid = zipcode.value.length >= 5;
+    const isValid = isLine1Valid && isCityValid && isStateValid && isZipcodeValid;
+
+    const pastState = Object.assign({}, this.state);
+    pastState.address.line1.hasError = !isLine1Valid;
+    pastState.address.city.hasError = !isCityValid;
+    pastState.address.state.hasError = !isStateValid;
+    pastState.address.zipcode.hasError = !isZipcodeValid;
+    this.setState(pastState);
+
+    return isValid;
+  }
+
   handleAccountInfoForm(e, { name, value }) {
     const pastState = Object.assign({}, this.state);
     pastState.accountInfo[name].value = value;
     pastState.accountInfo[name].hasError = false;
+    this.setState(pastState);
+  }
+
+  handeAddressForm(e, { name, value }) {
+    const pastState = Object.assign({}, this.state);
+    pastState.address[name].value = value;
+    pastState.address[name].hasError = false;
     this.setState(pastState);
   }
 
@@ -77,26 +113,27 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
           <Form.Input control={Input} label='Email' name='email' onChange={this.handleAccountInfoForm} value={email.value} error={email.hasError} required />
         </Form.Group>
         <Form.Group widths='equal'>
-          <Form.Input control={Input} label='Password' name='password' onChange={this.handleAccountInfoForm} value={password.value} error={password.hasError} required />
-          <Form.Input control={Input} label='Repeat password' name='repeatPassword' onChange={this.handleAccountInfoForm} value={repeatPassword.value} error={repeatPassword.hasError} required />
+          <Form.Input control={Input} label='Password' type='password' name='password' onChange={this.handleAccountInfoForm} value={password.value} error={password.hasError} required />
+          <Form.Input control={Input} label='Repeat password' type='password' name='repeatPassword' onChange={this.handleAccountInfoForm} value={repeatPassword.value} error={repeatPassword.hasError} required />
         </Form.Group>
       </Form>
     );
   }
 
   addressForm() {
+    const { line1, line2, city, state, zipcode } = this.state.address;
     return (
       <Form style={{ textAlign: 'left' }}>
         <Form.Group widths='equal'>
-          <Form.Input control={Input} label='Line 1' required />
-          <Form.Input control={Input} label='Line 2' required />
+          <Form.Input control={Input} label='Line 1' name='line1' onChange={this.handeAddressForm} value={line1.value} error={line1.hasError} required />
+          <Form.Input control={Input} label='Line 2' name='line2' onChange={this.handeAddressForm} value={line2.value} error={line2.hasError} />
         </Form.Group>
         <Form.Group>
-          <Form.Input control={Input} width={10} label='City' required />
-          <Form.Select fluid width={6} label='State' placeholder='State' search options={stateList} required />
+          <Form.Input control={Input} width={10} label='City' name='city' onChange={this.handeAddressForm} value={city.value} error={city.hasError} required />
+          <Form.Select fluid width={6} label='State' placeholder='State' search options={stateList} name='state' onChange={this.handeAddressForm} value={state.value} error={state.hasError} required />
         </Form.Group>
         <Form.Group widths='equal'>
-          <Form.Input control={Input} label='Zipcode' required />
+          <Form.Input control={Input} label='Zipcode' name='zipcode' onChange={this.handeAddressForm} value={zipcode.value} error={zipcode.hasError} required />
           <Popup
             trigger={<Form.Input control={Input} label='Country' value='United States of America' />}
             header='Country selection'
@@ -115,6 +152,8 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
         this.setState({ currentStep: 'address' });
         break;
       case 'address':
+        if (!this.addressFormVerification()) return;
+        this.setState({ currentStep: 'verification' });
         break;
       default:
         break;
@@ -135,9 +174,16 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
   }
 
   renderStepForm() {
-    if (this.state.currentStep === 'address') return this.addressForm();
-
-    return this.accountInfoForm();
+    switch (this.state.currentStep) {
+      case 'account':
+        return this.accountInfoForm();
+      case 'address':
+        return this.addressForm();
+      case 'verification':
+        return (<p>Hey there</p>);
+      default:
+        return null;
+    }
   }
 
   render() {
