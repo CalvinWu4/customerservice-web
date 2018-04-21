@@ -11,6 +11,7 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 
 import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
 import NewCommentForm from 'components/NewCommentForm';
 import TicketForm from 'components/TicketForm';
 import StoredCommentForm from 'components/StoredCommentForm';
@@ -47,6 +48,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     return (
       <div style={style.ticketView}>
         <Typography variant="body1" align="right" >Logout [email address]</Typography>
+        <Button variant="raised" color="primary" align="center" onClick={() => this.props.goToEdit('/tickets')}>Tickets</Button>
         <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)} returnProduct={this.returnProduct} closeTicket={this.closingTicket} />
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
