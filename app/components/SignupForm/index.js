@@ -6,7 +6,7 @@
 
 import React from 'react';
 
-import { Step, Icon, Segment, Button, Form, Input, Header, Popup } from 'semantic-ui-react';
+import { Step, Icon, Segment, Button, Form, Input, Header, Popup, Grid, List } from 'semantic-ui-react';
 import { isEmail } from 'validator';
 
 // eslint-disable-next-line
@@ -40,6 +40,7 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
 
     this.handleAccountInfoForm = this.handleAccountInfoForm.bind(this);
     this.handeAddressForm = this.handeAddressForm.bind(this);
+    this.verificationForm = this.verificationForm.bind(this);
 
     this.accountInfoForm = this.accountInfoForm.bind(this);
     this.addressForm = this.addressForm.bind(this);
@@ -145,6 +146,62 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
     );
   }
 
+  verificationForm() {
+    const { accountInfo, address } = this.state;
+    return (
+      <Grid style={{ width: '100%' }}>
+        <Grid.Row>
+          <Grid.Column textAlign='left'>
+            <Header as='h3'>Please verify the following details:</Header>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column textAlign='center' width={8}>
+            <div style={{ textAlign: 'left', marginLeft: '20%' }}>
+              <Header as='h4'>Account info</Header>
+              <List style={{ marginLeft: '10px' }}>
+                <List.Item>
+                  <strong>First name: </strong> {accountInfo.firstName.value}
+                </List.Item>
+                <List.Item>
+                  <strong>Last name: </strong> {accountInfo.lastName.value}
+                </List.Item>
+                <List.Item>
+                  <strong>Email: </strong> {accountInfo.email.value}
+                </List.Item>
+              </List>
+            </div>
+          </Grid.Column>
+          <Grid.Column textAlign='center' width={8}>
+            <div style={{ textAlign: 'left', marginLeft: '20%' }}>
+              <Header as='h4'>Address</Header>
+              <List style={{ marginLeft: '10px' }}>
+                <List.Item>
+                  <strong>Line1: </strong> {address.line1.value}
+                </List.Item>
+                <List.Item>
+                  <strong>Line2: </strong> {address.line2.value}
+                </List.Item>
+                <List.Item>
+                  <strong>City: </strong> {address.city.value}
+                </List.Item>
+                <List.Item>
+                  <strong>State: </strong> {address.state.value}
+                </List.Item>
+                <List.Item>
+                  <strong>Zipcode: </strong> {address.zipcode.value}
+                </List.Item>
+                <List.Item>
+                  <strong>Country: </strong> {address.country.value}
+                </List.Item>
+              </List>
+            </div>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    );
+  }
+
   goNext() {
     switch (this.state.currentStep) {
       case 'account':
@@ -180,7 +237,7 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
       case 'address':
         return this.addressForm();
       case 'verification':
-        return (<p>Hey there</p>);
+        return this.verificationForm();
       default:
         return null;
     }
@@ -216,8 +273,8 @@ class SignupForm extends React.Component { // eslint-disable-line react/prefer-s
         <Segment attached>
           { this.renderStepForm() }
         </Segment>
+        { this.state.currentStep === 'verification' ? (<Button style={{ float: 'right', marginTop: '5px', marginRight: '0px' }} color='orange'>Signup</Button>) : null }
         { this.state.currentStep !== 'verification' ? (<Button style={{ float: 'right', marginTop: '5px', marginRight: '0px' }} onClick={this.goNext} color='blue'>Next</Button>) : null }
-
         { this.state.currentStep !== 'account' ? (<Button style={{ float: 'right', marginTop: '5px', marginRight: '5px' }} onClick={this.goBack}>Back</Button>) : null }
       </div>
     );
