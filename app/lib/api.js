@@ -20,10 +20,19 @@ export function authenticateUser(/* userData */) {
   return true;
 }
 
+
+export function createTicket(ticket, clientId) {
+  return axios.post(`${domain}tickets?clientId=${clientId}`, ticket);
+}
+
 export function registerUser(clientData) {
   return axios.post(`${domain}clients`, clientData);
 }
 
 export function putTicketapi(ticket, ticketId) {
   return axios.put(`${domain}tickets/${ticketId}`, ticket);
+}
+
+export function returnProduct(ticket, ticketId) {
+  return axios.post(`${domain}tickets/${ticketId}/return`, ticket);
 }
