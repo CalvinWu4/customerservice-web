@@ -12,6 +12,7 @@ import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
 import NavigationBar from 'components/NavigationBar';
+import CreateTicketByAgentModal from 'components/CreateTicketByAgentModal';
 
 import { Grid, Header, Icon, Button, Table, Label, Menu } from 'semantic-ui-react';
 
@@ -26,11 +27,30 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
   constructor(props) {
     super(props);
 
+    this.state = {
+      isCreateTicketByAgentModalOpen: false,
+    };
+
     this.ticketRow = this.ticketRow.bind(this);
+
+    this.openCreateTicketByAgentModal = this.openCreateTicketByAgentModal.bind(this);
+    this.closeCreateTicketByAgentModal = this.closeCreateTicketByAgentModal.bind(this);
   }
 
   componentDidMount() {
     this.props.getTicketList();
+  }
+
+  openCreateTicketByAgentModal() {
+    this.setState({
+      isCreateTicketByAgentModalOpen: true,
+    });
+  }
+
+  closeCreateTicketByAgentModal() {
+    this.setState({
+      isCreateTicketByAgentModalOpen: false,
+    });
   }
 
   ticketRow(ticket) {
@@ -62,6 +82,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
   render() {
     return (
       <div style={{ width: '100%', height: '100vh' }}>
+        <CreateTicketByAgentModal open={this.state.isCreateTicketByAgentModalOpen} onCancel={this.closeCreateTicketByAgentModal} onCreate={(e) => console.log(e)} />
         <NavigationBar redirectTo={this.props.redirectTo}>
           <Grid>
             <Grid.Row>
@@ -77,7 +98,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
                 </Header>
               </Grid.Column>
               <Grid.Column width={8} textAlign='right'>
-                <Button size='large' color='blue'><Icon name='add' />Create ticket</Button>
+                <Button size='large' color='blue' onClick={this.openCreateTicketByAgentModal}><Icon name='add' />Create ticket</Button>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
