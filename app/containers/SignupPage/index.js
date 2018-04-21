@@ -12,6 +12,9 @@ import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
 import SignupContentWrapper from 'components/SignupContentWrapper';
+import SignupForm from 'components/SignupForm';
+
+import { Grid } from 'semantic-ui-react';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -23,6 +26,11 @@ export class SignupPage extends React.Component { // eslint-disable-line react/p
   render() {
     return (
       <SignupContentWrapper goHome={() => this.props.redirectTo('/')} goLogin={() => this.props.redirectTo('/login')}>
+        <Grid centered>
+          <Grid.Row>
+            <SignupForm />
+          </Grid.Row>
+        </Grid>
       </SignupContentWrapper>
     );
   }
