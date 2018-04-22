@@ -115,6 +115,7 @@ class NewCommentForm extends React.Component { // eslint-disable-line react/pref
                 helperText={this.state.description.helperText}
                 error={this.state.description.isInvalid}
                 onChange={this.onChange}
+                multiline
               />
             </Grid>
             <Button variant="raised" onClick={this.onCreateComment}>Post</Button>

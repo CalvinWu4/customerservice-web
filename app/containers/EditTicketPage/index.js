@@ -22,6 +22,7 @@ import makeSelectApplication from './../Application/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { putTicket } from './../Application/actions';
+import TopBar from '../../components/TopBar';
 
 
 export class EditTicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -37,6 +38,7 @@ export class EditTicketPage extends React.Component { // eslint-disable-line rea
     return (
       <div style={{ height: '100vh' }}>
         { /* onClick={this.props.putTicket} */}
+        <TopBar></TopBar>
         <EditTicketForm ticket={this.props.application.ticket} onUpdate={this.updateTicket} />
       </div>
     );

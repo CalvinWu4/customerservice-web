@@ -20,7 +20,7 @@ import saga from './saga';
 import { createTicket } from './actions';
 
 import NewTicketForm from '../../components/NewTicketForm';
-
+import TopBar from '../../components/TopBar';
 
 const divStyle = {
   width: '80%',
@@ -45,6 +45,7 @@ export class NewTicketPage extends React.Component { // eslint-disable-line reac
   render() {
     return (
       <div style={divStyle}>
+        <TopBar></TopBar>
         <Typography variant="title" component="h2" style={titleStyle}>Create Ticket</Typography>
         <NewTicketForm onCreateTicket={this.onCreateTicket} />
       </div>

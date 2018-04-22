@@ -24,6 +24,7 @@ import makeSelectTicketPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import style from './style';
+import TopBar from '../../components/TopBar';
 
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
@@ -46,7 +47,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
   render() {
     return (
       <div style={style.ticketView}>
-        <Typography variant="body1" align="right" >Logout [email address]</Typography>
+        <TopBar></TopBar>
         <TicketForm ticket={this.props.application.ticket} redirectToEdit={() => this.props.goToEdit(`/tickets/edit/${this.props.match.params.ticketId}`)} returnProduct={this.returnProduct} closeTicket={this.closingTicket} />
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
