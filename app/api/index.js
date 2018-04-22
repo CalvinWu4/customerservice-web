@@ -17,3 +17,7 @@ export function getClientAPI(clientId) {
 export function postLoginAPI(email, password) {
   return axios.post('https://api-gateway-343.herokuapp.com/auth/login', { username: email, password }, { headers: { 'Content-Type': 'application/json' } });
 }
+
+export function postClientAPI(client) {
+  return axios.post(`${ROOT_URI}/clients`, client, { headers: { 'Content-Type': 'application/json' } });
+}

@@ -21,6 +21,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectSignupPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { postClient } from './actions';
 
 export class SignupPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   render() {
@@ -28,7 +29,7 @@ export class SignupPage extends React.Component { // eslint-disable-line react/p
       <SignupContentWrapper goHome={() => this.props.redirectTo('/')} goLogin={() => this.props.redirectTo('/login')}>
         <Grid centered>
           <Grid.Row>
-            <SignupForm onSignup={(e) => console.log(e)} />
+            <SignupForm onSignup={this.props.postClient} />
           </Grid.Row>
         </Grid>
       </SignupContentWrapper>
@@ -38,6 +39,7 @@ export class SignupPage extends React.Component { // eslint-disable-line react/p
 
 SignupPage.propTypes = {
   redirectTo: PropTypes.func.isRequired,
+  postClient: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -47,6 +49,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     redirectTo: (url) => dispatch(push(url)),
+    postClient: (url) => dispatch(postClient(url)),
   };
 }
 
