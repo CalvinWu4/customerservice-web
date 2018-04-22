@@ -30,7 +30,7 @@ function* postLoginSaga(action) {
     const token = jwt(data.token);
     const result = yield call(getClientAPI, token.id);
 
-    yield put(postLoginSucceded({ ...data, account: result.data }));
+    yield put(postLoginSucceded({ ...data, account: result.data, accountType: token.accountType }));
   } catch (e) {
     console.error(e);
   }
