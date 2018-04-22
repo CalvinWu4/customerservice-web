@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 import {
-  GET_CLIENTS_SUCCEDED, POST_LOGIN_SUCCEDED,
+  GET_CLIENTS_SUCCEDED, POST_LOGIN_SUCCEDED, GET_CLIENT_SUCCEDED,
 } from './constants';
 
 const initialState = fromJS({
@@ -32,8 +32,10 @@ function applicationReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CLIENTS_SUCCEDED:
       return state.set('clients', fromJS(action.clients));
+    case GET_CLIENT_SUCCEDED:
+      return state.set('client', fromJS(action.client));
     case POST_LOGIN_SUCCEDED:
-      return state.set('token', fromJS(action.result.token));
+      return state.set('token', fromJS(action.result.token)).set('client', fromJS(action.result.account));
     default:
       return state;
   }

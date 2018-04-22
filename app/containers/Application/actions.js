@@ -11,6 +11,9 @@ import {
   POST_LOGIN,
   POST_LOGIN_SUCCEDED,
   POST_LOGIN_FAILED,
+  GET_CLIENT,
+  GET_CLIENT_FAILED,
+  GET_CLIENT_SUCCEDED,
 } from './constants';
 
 export function getClients() {
@@ -29,6 +32,27 @@ export function getClientsSucceded(clients) {
 export function getClientsFailed(error) {
   return {
     type: GET_CLIENTS_FAILED,
+    error,
+  };
+}
+
+export function getClient(clientId) {
+  return {
+    type: GET_CLIENT,
+    clientId,
+  };
+}
+
+export function getClientSucceded(client) {
+  return {
+    type: GET_CLIENT_SUCCEDED,
+    client,
+  };
+}
+
+export function getClientFailed(error) {
+  return {
+    type: GET_CLIENT_FAILED,
     error,
   };
 }
