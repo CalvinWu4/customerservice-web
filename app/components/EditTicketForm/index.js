@@ -30,6 +30,7 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
       status: this.props.ticket.status,
       description: this.props.ticket.description,
       priority: this.props.ticket.priority,
+      isAgent: true,
     };
     this.onChange = this.onChange.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
@@ -65,10 +66,7 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title">Device Information</Typography>
-              <TextField variant="body1" label="Model:"></TextField>
-            </Grid>
-            <Grid item xs={6} style={style.gridContainerChild}>
-              <TextField type="number" label="Serial No"> </TextField>
+              <TextField type="number" label="Serial No" value={this.props.ticket.productSerialNumber} />
             </Grid>
             <Grid item xs={6}>
               <Typography variant="title" component="h3" style={style.gridContainerChildBottom} >Customer Information</Typography>
@@ -80,8 +78,15 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
             <Grid item xs={6} style={style.gridContainerChildBottom}>
               <Typography variant="title" component="h3">Customer Support Agent: </Typography>
               <Typography variant="body1" component="p">{this.props.ticket.agentId}</Typography>
-              <Typography variant="caption">Priority</Typography>
-              <TextField variant="body1" label="High/Medium/Low" value={this.state.priority} />
+              {/* insert a select with options when edited*/}
+              <select>
+                {this.props.agents.map((t) => {
+                  return (
+                    <option>{t.firstName} {t.lastName}</option>
+                    );
+                  })}
+                <option></option>
+              </select>
             </Grid>
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.onUpdate}>Save</Button></Grid></Grid>
           </Grid>
@@ -94,6 +99,7 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
 EditTicketForm.propTypes = {
   ticket: PropTypes.object,
   onUpdate: PropTypes.func,
+  agents: PropTypes.object,
 };
 
 export default EditTicketForm;

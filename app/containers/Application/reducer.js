@@ -50,6 +50,16 @@ const initialState = fromJS({
       country: '',
     },
   },
+  agent: {
+    id: '',
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    regionName: '',
+    roleName: '',
+    departmentName: '',
+    positionName: '',
+  },
 });
 
 function applicationReducer(state = initialState, action) {

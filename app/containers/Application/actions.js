@@ -5,7 +5,7 @@
  */
 
 
-import { GET_TICKET, GET_TICKET_SUCCESS, GET_TICKET_FAILURE, PUT_TICKET, PUT_TICKET_SUCCESS, PUT_TICKET_FAILURE, POST_RETURN, POST_RETURN_SUCCESS, POST_RETURN_FAILURE } from './constants';
+import { GET_TICKET, GET_TICKET_SUCCESS, GET_TICKET_FAILURE, PUT_TICKET, PUT_TICKET_SUCCESS, PUT_TICKET_FAILURE, POST_RETURN, POST_RETURN_SUCCESS, POST_RETURN_FAILURE, GET_AGENTS, GET_AGENTS_SUCCESS, GET_AGENTS_FAILURE } from './constants';
 
 export function getTicket(ticketId) {
   return {
@@ -69,3 +69,23 @@ export function postReturnFailure(error) {
     error,
   };
 }
+
+export function getAgents() {
+  return {
+    type: GET_AGENTS,
+  };
+}
+
+export function getAgentsSuccess(agents) {
+  return {
+    type: GET_AGENTS_SUCCESS,
+    agents,
+  };
+}
+export function getAgentsFailure(error) {
+  return {
+    type: GET_AGENTS_FAILURE,
+    error,
+  };
+}
+

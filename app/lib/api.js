@@ -16,7 +16,7 @@ export function addTicket(ticketData) {
 
 export function authenticateUser(/* userData */) {
   // TODO: call out to HR endpoint and return true/false
-  // Stubbed to always return true for Release 2
+  // Stubbed to always return true for Release 3
   return true;
 }
 
@@ -35,4 +35,8 @@ export function putTicketapi(ticket, ticketId) {
 
 export function returnProduct(ticket, ticketId) {
   return axios.post(`${domain}tickets/${ticketId}/return`, ticket);
+}
+
+export function getAgentsapi() {
+  return axios.get('http://kennuware-1772705765.us-east-1.elb.amazonaws.com/api/employee');
 }

@@ -21,13 +21,15 @@ import makeSelectApplication from './../Application/selectors';
 
 import reducer from './reducer';
 import saga from './saga';
-import { putTicket } from './../Application/actions';
-
+import { putTicket, getAgents } from './../Application/actions';
 
 export class EditTicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.updateTicket = this.updateTicket.bind(this);
+  }
+  componentDidMount() {
+    this.props.getAgents();
   }
   updateTicket(ticket) {
     this.props.putTicket(ticket, this.props.match.params.ticketId);
@@ -37,7 +39,7 @@ export class EditTicketPage extends React.Component { // eslint-disable-line rea
     return (
       <div style={{ height: '100vh' }}>
         { /* onClick={this.props.putTicket} */}
-        <EditTicketForm ticket={this.props.application.ticket} onUpdate={this.updateTicket} />
+        <EditTicketForm ticket={this.props.application.ticket} agents={this.props.application.agents} onUpdate={this.updateTicket} />
       </div>
     );
   }
@@ -48,6 +50,7 @@ EditTicketPage.propTypes = {
   redirectTo: PropTypes.func,
   match: PropTypes.object,
   putTicket: PropTypes.func,
+  getAgents: PropTypes.func,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -60,6 +63,7 @@ function mapDispatchToProps(dispatch) {
   return {
     redirectTo: (url) => dispatch(push(url)),
     putTicket: (ticket, id) => dispatch(putTicket(ticket, id)),
+    getAgents: () => dispatch(getAgents()),
   };
 }
 

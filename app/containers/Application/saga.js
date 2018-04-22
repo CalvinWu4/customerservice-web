@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { getTicketapi, putTicketapi } from 'lib/api';
-import { GET_TICKET, PUT_TICKET, POST_RETURN } from './constants';
-import { getTicketFailure, getTicketSuccess, putTicketFailure, getTicket, postReturn, postReturnFailure, postReturnSuccess } from './actions';
+import { getTicketapi, putTicketapi, getAgentsapi } from 'lib/api';
+import { GET_TICKET, PUT_TICKET, POST_RETURN, GET_AGENTS } from './constants';
+import { getTicketFailure, getTicketSuccess, putTicketFailure, getTicket, postReturn, postReturnFailure, postReturnSuccess, getAgentsSuccess, getAgentsFailure } from './actions';
 
 function* getTicketSaga(action) {
   try {
@@ -31,10 +31,20 @@ function* postReturnSaga(action) {
   }
 }
 
+function* getAgentsSaga() {
+  try {
+    const { data } = yield call(getAgentsapi);
+    yield put(getAgentsSuccess(data));
+  } catch (e) {
+    yield put(getAgentsFailure(e));
+  }
+}
+
 export default function* defaultSaga() {
   yield [
     takeLatest(GET_TICKET, getTicketSaga),
     takeLatest(PUT_TICKET, putTicketSaga),
     takeLatest(POST_RETURN, postReturnSaga),
+    takeLatest(GET_AGENTS, getAgentsSaga),
   ];
 }
