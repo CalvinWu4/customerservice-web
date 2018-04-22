@@ -10,9 +10,11 @@ import {
   GET_TICKETS_FAILED,
 } from './constants';
 
-export function getTickets() {
+export function getTickets(accountId, accountType) {
   return {
     type: GET_TICKETS,
+    accountId,
+    accountType,
   };
 }
 

@@ -39,7 +39,8 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
   }
 
   componentDidMount() {
-    this.props.getTicketList();
+    const { account, accountType } = this.props.application;
+    this.props.getTicketList(account.id, accountType);
   }
 
   openCreateTicketByAgentModal() {
@@ -148,7 +149,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     redirectTo: (url) => dispatch(push(url)),
-    getTicketList: () => dispatch(getTickets()),
+    getTicketList: (accountId, accountType) => dispatch(getTickets(accountId, accountType)),
   };
 }
 

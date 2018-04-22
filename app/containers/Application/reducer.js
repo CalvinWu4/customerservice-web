@@ -13,7 +13,7 @@ const initialState = fromJS({
   clients: [],
   token: '',
   accountType: '',
-  client: {
+  account: {
     id: 0,
     firstName: '',
     lastName: '',
@@ -36,7 +36,7 @@ function applicationReducer(state = initialState, action) {
     case GET_CLIENT_SUCCEDED:
       return state.set('client', fromJS(action.client));
     case POST_LOGIN_SUCCEDED:
-      return state.set('token', fromJS(action.result.token)).set('client', fromJS(action.result.account)).set('accountType', fromJS(action.result.accountType));
+      return state.set('token', fromJS(action.result.token)).set('account', fromJS(action.result.account)).set('accountType', fromJS(action.result.accountType));
     default:
       return state;
   }
