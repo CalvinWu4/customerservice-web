@@ -1,23 +1,22 @@
 /**
 *
-* CreateTicketByAgentModal
+* CreateTicketByClientModal
 *
 */
 
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Modal, Button, Form, Input, Select } from 'semantic-ui-react';
+import { Modal, Button, Form, Input } from 'semantic-ui-react';
 
 
-class CreateTicketByAgentModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
+class CreateTicketByClientModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
 
     this.state = {
       title: { value: '', hasError: false },
       productSerialNumber: { value: '', hasError: false },
-      clientId: { value: -1, hasError: false },
       description: { value: '', hasError: false },
     };
 
@@ -37,26 +36,23 @@ class CreateTicketByAgentModal extends React.Component { // eslint-disable-line 
   onCreate() {
     if (!this.validateForm()) return;
 
-    const { title, productSerialNumber, clientId, description } = this.state;
+    const { title, productSerialNumber, description } = this.state;
     this.props.onCreate({
       title: title.value,
       productSerialNumber: productSerialNumber.value,
-      clientId: clientId.value,
       description: description.value,
     });
   }
 
   validateForm() {
-    const { title, productSerialNumber, clientId } = this.state;
+    const { title, productSerialNumber } = this.state;
     const isTitleValid = title.value.length > 5;
     const isProductSerialNumberValid = productSerialNumber.value.length > 0;
-    const isClientIdValid = clientId.value > 0;
-    const isValid = isTitleValid && isProductSerialNumberValid && isClientIdValid;
+    const isValid = isTitleValid && isProductSerialNumberValid;
 
     const pastState = Object.assign({}, this.state);
     pastState.title.hasError = !isTitleValid;
     pastState.productSerialNumber.hasError = !isProductSerialNumberValid;
-    pastState.clientId.hasError = !isClientIdValid;
     this.setState(pastState);
 
     return isValid;
@@ -67,7 +63,7 @@ class CreateTicketByAgentModal extends React.Component { // eslint-disable-line 
   }
 
   render() {
-    const { title, productSerialNumber, clientId, description } = this.state;
+    const { title, productSerialNumber, description } = this.state;
     return (
       <Modal open={this.props.open} size='small'>
         <Modal.Header>Create ticket</Modal.Header>
@@ -75,10 +71,7 @@ class CreateTicketByAgentModal extends React.Component { // eslint-disable-line 
           <Form>
             <Form.Group widths='equal'>
               <Form.Input control={Input} label='Title' name='title' onChange={this.onChange} value={title.value} error={title.hasError} required />
-            </Form.Group>
-            <Form.Group widths='equal'>
               <Form.Input control={Input} label='Product serial number' name='productSerialNumber' onChange={this.onChange} value={productSerialNumber.value} error={productSerialNumber.hasError} required />
-              <Form.Field control={Select} label='Client' name='clientId' onChange={this.onChange} value={clientId.value} error={clientId.hasError} options={this.props.clients.map(this.clientToOption)} required />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.TextArea label='Description' name='description' onChange={this.onChange} value={description.value} />
@@ -94,11 +87,10 @@ class CreateTicketByAgentModal extends React.Component { // eslint-disable-line 
   }
 }
 
-CreateTicketByAgentModal.propTypes = {
+CreateTicketByClientModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onCreate: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
-  clients: PropTypes.array.isRequired,
 };
 
-export default CreateTicketByAgentModal;
+export default CreateTicketByClientModal;

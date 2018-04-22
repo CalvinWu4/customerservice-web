@@ -13,7 +13,7 @@ import { push } from 'react-router-redux';
 
 import makeSelectApplication from 'containers/Application/selectors';
 import NavigationBar from 'components/NavigationBar';
-import CreateTicketByAgentModal from 'components/CreateTicketByAgentModal';
+import CreateTicketByClientModal from 'components/CreateTicketByClientModal';
 
 import { Grid, Header, Icon, Button, Table, Label, Menu } from 'semantic-ui-react';
 
@@ -22,20 +22,21 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectTicketListPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getTickets } from './actions';
+import { getTickets, postTicket } from './actions';
 
 export class TicketListPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
 
     this.state = {
-      isCreateTicketByAgentModalOpen: false,
+      isCreateTicketByClientModalOpen: false,
     };
 
+    this.onCreateTicket = this.onCreateTicket.bind(this);
     this.ticketRow = this.ticketRow.bind(this);
 
-    this.openCreateTicketByAgentModal = this.openCreateTicketByAgentModal.bind(this);
-    this.closeCreateTicketByAgentModal = this.closeCreateTicketByAgentModal.bind(this);
+    this.openCreateTicketByClientModal = this.openCreateTicketByClientModal.bind(this);
+    this.closeCreateTicketByClientModal = this.closeCreateTicketByClientModal.bind(this);
   }
 
   componentDidMount() {
@@ -43,15 +44,22 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
     this.props.getTicketList(account.id, accountType);
   }
 
-  openCreateTicketByAgentModal() {
+  onCreateTicket(ticket) {
+    const { account, accountType } = this.props.application;
+    this.props.postTicket(ticket, account.id, accountType);
+
+    this.closeCreateTicketByClientModal();
+  }
+
+  openCreateTicketByClientModal() {
     this.setState({
-      isCreateTicketByAgentModalOpen: true,
+      isCreateTicketByClientModalOpen: true,
     });
   }
 
-  closeCreateTicketByAgentModal() {
+  closeCreateTicketByClientModal() {
     this.setState({
-      isCreateTicketByAgentModalOpen: false,
+      isCreateTicketByClientModalOpen: false,
     });
   }
 
@@ -84,7 +92,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
   render() {
     return (
       <div style={{ width: '100%', height: '100vh' }}>
-        <CreateTicketByAgentModal open={this.state.isCreateTicketByAgentModalOpen} onCancel={this.closeCreateTicketByAgentModal} onCreate={(e) => console.log(e)} clients={this.props.application.clients} />
+        <CreateTicketByClientModal open={this.state.isCreateTicketByClientModalOpen} onCancel={this.closeCreateTicketByClientModal} onCreate={this.onCreateTicket} clients={this.props.application.clients} />
         <NavigationBar redirectTo={this.props.redirectTo}>
           <Grid>
             <Grid.Row>
@@ -100,7 +108,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
                 </Header>
               </Grid.Column>
               <Grid.Column width={8} textAlign='right'>
-                <Button size='large' color='blue' onClick={this.openCreateTicketByAgentModal}><Icon name='add' />Create ticket</Button>
+                { this.props.application.accountType === 'customer' ? (<Button size='large' color='blue' onClick={this.openCreateTicketByClientModal}><Icon name='add' />Create ticket</Button>) : null }
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -139,6 +147,7 @@ TicketListPage.propTypes = {
   application: PropTypes.object.isRequired,
   ticketlistpage: PropTypes.object.isRequired,
   getTicketList: PropTypes.func.isRequired,
+  postTicket: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -150,6 +159,7 @@ function mapDispatchToProps(dispatch) {
   return {
     redirectTo: (url) => dispatch(push(url)),
     getTicketList: (accountId, accountType) => dispatch(getTickets(accountId, accountType)),
+    postTicket: (ticket, accountId, accountType) => dispatch(postTicket(ticket, accountId, accountType)),
   };
 }
 

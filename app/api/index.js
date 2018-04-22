@@ -2,9 +2,13 @@ import axios from 'axios';
 
 export const ROOT_URI = 'https://api-customerservice.azurewebsites.net/api';
 
-export function getTicketListAPI(accountId, accountType) {
+function getAccountQueryName(accountId, accountType) {
   const name = accountType === 'customer' ? 'clientId' : 'agentId';
-  return axios.get(`${ROOT_URI}/tickets?${name}=${accountId}`);
+  return `${name}=${accountId}`;
+}
+
+export function getTicketListAPI(accountId, accountType) {
+  return axios.get(`${ROOT_URI}/tickets?${getAccountQueryName(accountId, accountType)}}`);
 }
 
 export function getClientsAPI() {
@@ -21,4 +25,8 @@ export function postLoginAPI(email, password) {
 
 export function postClientAPI(client) {
   return axios.post(`${ROOT_URI}/clients`, client, { headers: { 'Content-Type': 'application/json' } });
+}
+
+export function postTicketAPI(ticket, accountId, accountType) {
+  return axios.post(`${ROOT_URI}/tickets?${getAccountQueryName(accountId, accountType)}`, ticket, { headers: { 'Content-Type': 'application/json' } });
 }
