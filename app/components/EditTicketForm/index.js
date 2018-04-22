@@ -7,7 +7,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-
+// import DropDownMenu from 'material-ui/DropDownMenu';
+// import MenuItem from 'material-ui/MenuItem';
 import Card from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
@@ -81,6 +82,11 @@ class EditTicketForm extends React.Component { // eslint-disable-line react/pref
               <Typography variant="title" component="h3">Customer Support Agent: </Typography>
               <Typography variant="body1" component="p">{this.props.ticket.agentId}</Typography>
               <Typography variant="caption">Priority</Typography>
+              {/* <DropDownMenu value={this.state.value} onChange={this.handleChange}>
+                <MenuItem value={1} primaryText="Low" />
+                <MenuItem value={2} primaryText="Medium" />
+                <MenuItem value={3} primaryText="High" />
+              </DropDownMenu> */}
               <TextField variant="body1" label="High/Medium/Low" value={this.state.priority} />
             </Grid>
             <Grid item xs={12} style={style.gridContainerChildBottom}><Grid container justify="center"><Button variant="raised" color="primary" onClick={this.onUpdate}>Save</Button></Grid></Grid>

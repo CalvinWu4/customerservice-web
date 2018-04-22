@@ -51,7 +51,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
         <Typography variant="headline" style={style.childComponents}>Comments</Typography>
         <StoredCommentForm> </StoredCommentForm>
         <Typography variant="subheading" style={style.childComponents}>Add New Comment</Typography>
-        <NewCommentForm ></NewCommentForm>
+        <NewCommentForm onCreateComment={(e) => console.log(e)} />
       </div>
     );
   }

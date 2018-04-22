@@ -13,7 +13,6 @@ import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Ta
 class ClientTicketTable extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
-
     this.renderTicketRow = this.renderTicketRow.bind(this);
   }
 
@@ -34,7 +33,7 @@ class ClientTicketTable extends React.Component { // eslint-disable-line react/p
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell>Issue</TableCell>
+            <TableCell >Issue</TableCell>
             <TableCell>Device Model</TableCell>
             <TableCell>Date Opened</TableCell>
             <TableCell>Status</TableCell>
