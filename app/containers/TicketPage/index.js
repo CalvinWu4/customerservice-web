@@ -12,20 +12,51 @@ import { compose } from 'redux';
 import { push } from 'react-router-redux';
 
 import NavigationBar from 'components/NavigationBar';
+import UpdateTicketModal from 'components/UpdateTicketModal';
 
-import { Grid, Card, Breadcrumb, Comment, Header, Form, Button } from 'semantic-ui-react';
+import { Grid, Card, Breadcrumb, Comment, Header, Form, Button, Icon } from 'semantic-ui-react';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectTicketPage from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getTicket } from './actions';
+import { getTicket, putTicket } from './actions';
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isUpdateTicketModalOpen: false,
+    };
+
+    this.openUpdateTicketModal = this.openUpdateTicketModal.bind(this);
+    this.closeUpdateTicketModal = this.closeUpdateTicketModal.bind(this);
+
+    this.onUpdateTicket = this.onUpdateTicket.bind(this);
+  }
+
   componentDidMount() {
     const { ticketId } = this.props.match.params;
     this.props.getTicket(ticketId);
+  }
+
+  onUpdateTicket(ticket) {
+    this.props.putTicket(ticket, this.props.ticketpage.ticket.id);
+    this.closeUpdateTicketModal();
+  }
+
+  openUpdateTicketModal() {
+    this.setState({
+      isUpdateTicketModalOpen: true,
+    });
+  }
+
+  closeUpdateTicketModal() {
+    this.setState({
+      isUpdateTicketModalOpen: false,
+    });
   }
 
   render() {
@@ -34,14 +65,18 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     return (
       <div style={{ width: '100%', height: '100vh' }}>
         <NavigationBar redirectTo={this.props.redirectTo}>
+          <UpdateTicketModal open={this.state.isUpdateTicketModalOpen} onCancel={this.closeUpdateTicketModal} ticket={ticket} onUpdate={this.onUpdateTicket} />
           <Grid>
             <Grid.Row>
-              <Grid.Column>
+              <Grid.Column width={8}>
                 <Breadcrumb size='huge'>
                   <Breadcrumb.Section onClick={() => this.props.redirectTo('/tickets')} link>Tickets</Breadcrumb.Section>
                   <Breadcrumb.Divider />
                   <Breadcrumb.Section>{ticket.title}</Breadcrumb.Section>
                 </Breadcrumb>
+              </Grid.Column>
+              <Grid.Column textAlign='right' width={8}>
+                <Button onClick={this.openUpdateTicketModal}><Icon name='edit' /> Edit</Button>
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -105,6 +140,7 @@ TicketPage.propTypes = {
   ticketpage: PropTypes.object.isRequired,
   redirectTo: PropTypes.func.isRequired,
   getTicket: PropTypes.func.isRequired,
+  putTicket: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -115,6 +151,7 @@ function mapDispatchToProps(dispatch) {
   return {
     redirectTo: (url) => dispatch(push(url)),
     getTicket: (ticketId) => dispatch(getTicket(ticketId)),
+    putTicket: (ticket, ticketId) => dispatch(putTicket(ticket, ticketId)),
   };
 }
 
