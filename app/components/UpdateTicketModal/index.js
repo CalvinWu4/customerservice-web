@@ -9,6 +9,11 @@ import PropTypes from 'prop-types';
 
 import { Modal, Button, Form, Input } from 'semantic-ui-react';
 
+const statusOptions = [
+  { key: 'new', text: 'New', value: 'new' },
+  { key: 'in-progress', text: 'In-progress', value: 'in-progress' },
+  { key: 'closed', text: 'Closed', value: 'closed' },
+];
 
 class UpdateTicketModal extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -16,7 +21,7 @@ class UpdateTicketModal extends React.Component { // eslint-disable-line react/p
 
     this.state = {
       title: { value: '', hasError: false },
-      productSerialNumber: { value: '', hasError: false },
+      status: { value: '', hasError: false },
       description: { value: '', hasError: false },
     };
 
@@ -31,7 +36,7 @@ class UpdateTicketModal extends React.Component { // eslint-disable-line react/p
 
     const pastState = Object.assign({}, this.state);
     pastState.title.value = newProps.ticket.title;
-    pastState.productSerialNumber.value = newProps.ticket.productSerialNumber;
+    pastState.status.value = newProps.ticket.status;
     pastState.description.value = newProps.ticket.description;
     this.setState(pastState);
   }
@@ -45,30 +50,30 @@ class UpdateTicketModal extends React.Component { // eslint-disable-line react/p
   onUpdate() {
     if (!this.validateForm()) return;
 
-    const { title, productSerialNumber, description } = this.state;
+    const { title, status, description } = this.state;
     this.props.onUpdate({
       title: title.value,
-      productSerialNumber: productSerialNumber.value,
+      status: status.value,
       description: description.value,
     });
   }
 
   validateForm() {
-    const { title, productSerialNumber } = this.state;
+    const { title, status } = this.state;
     const isTitleValid = title.value.length > 5;
-    const isProductSerialNumberValid = productSerialNumber.value.length > 0;
-    const isValid = isTitleValid && isProductSerialNumberValid;
+    const isStatusValid = status.value.length > 0;
+    const isValid = isTitleValid && isStatusValid;
 
     const pastState = Object.assign({}, this.state);
     pastState.title.hasError = !isTitleValid;
-    pastState.productSerialNumber.hasError = !isProductSerialNumberValid;
+    pastState.status.hasError = !isStatusValid;
     this.setState(pastState);
 
     return isValid;
   }
 
   render() {
-    const { title, productSerialNumber, description } = this.state;
+    const { title, description, status } = this.state;
 
     return (
       <Modal open={this.props.open} size='small'>
@@ -77,7 +82,7 @@ class UpdateTicketModal extends React.Component { // eslint-disable-line react/p
           <Form>
             <Form.Group widths='equal'>
               <Form.Input control={Input} label='Title' name='title' onChange={this.onChange} value={title.value} error={title.hasError} required />
-              <Form.Input control={Input} label='Product serial number' name='productSerialNumber' onChange={this.onChange} value={productSerialNumber.value} error={productSerialNumber.hasError} required />
+              <Form.Select fluid label='Status' options={statusOptions} name='status' onChange={this.onChange} value={status.value} required />
             </Form.Group>
             <Form.Group widths='equal'>
               <Form.TextArea label='Description' name='description' onChange={this.onChange} value={description.value} />
