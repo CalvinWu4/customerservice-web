@@ -81,7 +81,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
     }
 
     return (
-      <Table.Row key={`containers_ticketlistpage_ticket_${ticket.id}`}>
+      <Table.Row key={`containers_ticketlistpage_ticket_${ticket.id}`} onClick={() => this.props.redirectTo(`/tickets/${ticket.id}`)}>
         <Table.Cell>{ ticket.title }</Table.Cell>
         <Table.Cell>{ `${ticket.client.firstName} ${ticket.client.lastName}` }</Table.Cell>
         <Table.Cell><Label color={color} content={ticket.status} /></Table.Cell>

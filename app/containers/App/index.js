@@ -19,6 +19,7 @@ import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import SignupPage from 'containers/SignupPage/Loadable';
 import TicketListPage from 'containers/TicketListPage/Loadable';
+import TicketPage from 'containers/TicketPage/Loadable';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 
 export default function App() {
@@ -29,6 +30,7 @@ export default function App() {
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/signup' component={SignupPage} />
         <Route exact path='/tickets' component={TicketListPage} />
+        <Route exact path='/tickets/:ticketId' component={TicketPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </Application>
