@@ -52,7 +52,7 @@ class NavigationBar extends React.Component { // eslint-disable-line react/prefe
             <Menu.Menu position='right'>
               <Dropdown item text='Camilo Gonzalez'>
                 <Dropdown.Menu>
-                  <Dropdown.Item>My profile</Dropdown.Item>
+                  <Dropdown.Item href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>My profile</Dropdown.Item>
                   <Dropdown.Item onClick={() => this.props.redirectTo('/')}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>

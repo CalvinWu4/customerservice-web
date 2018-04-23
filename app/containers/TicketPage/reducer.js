@@ -17,6 +17,7 @@ const initialState = fromJS({
     status: '',
     productSerialNumber: '',
     agentId: '',
+    comments: [],
     client: {
       id: '',
       firstName: '',

@@ -18,10 +18,6 @@ import saga from './saga';
 import { getClients } from './actions';
 
 export class Application extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  componentDidMount() {
-    this.props.getClients();
-  }
-
   render() {
     return (
       <div>
@@ -33,7 +29,6 @@ export class Application extends React.Component { // eslint-disable-line react/
 
 Application.propTypes = {
   children: PropTypes.node,
-  getClients: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({

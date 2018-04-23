@@ -35,6 +35,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     this.closeUpdateTicketModal = this.closeUpdateTicketModal.bind(this);
 
     this.onUpdateTicket = this.onUpdateTicket.bind(this);
+    this.commentRow = this.commentRow.bind(this);
   }
 
   componentDidMount() {
@@ -57,6 +58,23 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     this.setState({
       isUpdateTicketModalOpen: false,
     });
+  }
+
+  commentRow(comment) {
+    return (
+      <Comment key={`containers_ticketpage_comment_${comment.id}`}>
+        <Comment.Content>
+          <Comment.Author as='a'>{comment.clientId !== -1 ? 'Me' : 'Agent'}</Comment.Author>
+          <Comment.Metadata>
+            <div>Today at 5:42PM</div>
+          </Comment.Metadata>
+          <Comment.Text>{comment.content}</Comment.Text>
+          <Comment.Actions>
+            <Comment.Action>Reply</Comment.Action>
+          </Comment.Actions>
+        </Comment.Content>
+      </Comment>
+    );
   }
 
   render() {
@@ -109,18 +127,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
               <Grid.Column>
                 <Comment.Group size='large'>
                   <Header as='h3'>Comments</Header>
-                  <Comment>
-                    <Comment.Content>
-                      <Comment.Author as='a'>Matt</Comment.Author>
-                      <Comment.Metadata>
-                        <div>Today at 5:42PM</div>
-                      </Comment.Metadata>
-                      <Comment.Text>How artistic!</Comment.Text>
-                      <Comment.Actions>
-                        <Comment.Action>Reply</Comment.Action>
-                      </Comment.Actions>
-                    </Comment.Content>
-                  </Comment>
+                  { ticket.comments.map(this.commentRow) }
                   <Form reply>
                     <Form.TextArea />
                     <Button content='Add Reply' labelPosition='left' icon='edit' primary />

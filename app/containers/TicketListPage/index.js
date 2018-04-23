@@ -73,7 +73,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
       case 'in-progress':
         color = 'yellow';
         break;
-      case 'done':
+      case 'closed':
         color = 'red';
         break;
       default:
