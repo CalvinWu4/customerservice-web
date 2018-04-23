@@ -38,3 +38,7 @@ export function putTicketAPI(ticket, ticketId) {
 export function getTicketAPI(ticketId) {
   return axios.get(`${ROOT_URI}/tickets/${ticketId}`);
 }
+
+export function postCommentAPI(comment, accountId, accountType) {
+  return axios.post(`${ROOT_URI}/comments?${getAccountQueryName(accountId, accountType)}`, comment, { headers: { 'Content-Type': 'application/json' } });
+}

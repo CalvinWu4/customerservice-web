@@ -12,7 +12,7 @@ import {
 const initialState = fromJS({
   clients: [],
   token: '',
-  accountType: '',
+  accountType: 'employeee',
   account: {
     id: 0,
     firstName: '',

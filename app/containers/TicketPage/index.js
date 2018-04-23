@@ -19,9 +19,10 @@ import { Grid, Card, Breadcrumb, Comment, Header, Form, Button, Icon } from 'sem
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectTicketPage from './selectors';
+import makeSelectApplication from './../Application/selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getTicket, putTicket } from './actions';
+import { getTicket, putTicket, postComment } from './actions';
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -29,13 +30,18 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 
     this.state = {
       isUpdateTicketModalOpen: false,
+      content: { value: '', hasError: false },
     };
 
     this.openUpdateTicketModal = this.openUpdateTicketModal.bind(this);
     this.closeUpdateTicketModal = this.closeUpdateTicketModal.bind(this);
-
+    this.handleChange = this.handleChange.bind(this);
     this.onUpdateTicket = this.onUpdateTicket.bind(this);
+    this.onCreateComment = this.onCreateComment.bind(this);
     this.commentRow = this.commentRow.bind(this);
+    this.validateComment = this.validateComment.bind(this);
+
+    this.getCommentAuthor = this.getCommentAuthor.bind(this);
   }
 
   componentDidMount() {
@@ -44,8 +50,32 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
   }
 
   onUpdateTicket(ticket) {
-    this.props.putTicket(ticket, this.props.ticketpage.ticket.id);
+    const { ticketId } = this.props.match.params;
+    this.props.putTicket(ticket, ticketId);
     this.closeUpdateTicketModal();
+  }
+
+  onCreateComment() {
+    if (!this.validateComment()) return;
+
+    const { ticketId } = this.props.match.params;
+    const { account, accountType } = this.props.application;
+    this.props.postComment({ content: this.state.content.value, ticketId }, account.id, accountType);
+  }
+
+
+  getCommentAuthor(comment) {
+    const { accountType } = this.props.application;
+    const commentedBy = comment.clientId !== -1 ? 'customer' : 'employeee';
+    if (accountType === commentedBy) return 'Me';
+
+    return commentedBy === 'customer' ? 'Client' : 'Agent';
+  }
+
+  handleChange(e, { name, value }) {
+    this.setState({
+      [name]: { value, hasError: false },
+    });
   }
 
   openUpdateTicketModal() {
@@ -60,11 +90,19 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     });
   }
 
+  validateComment() {
+    const hasError = this.state.content.value.length === 0;
+
+    this.setState({ content: { ...this.state.content, hasError } });
+
+    return !hasError;
+  }
+
   commentRow(comment) {
     return (
       <Comment key={`containers_ticketpage_comment_${comment.id}`}>
         <Comment.Content>
-          <Comment.Author as='a'>{comment.clientId !== -1 ? 'Me' : 'Agent'}</Comment.Author>
+          <Comment.Author as='a'>{ this.getCommentAuthor(comment) }</Comment.Author>
           <Comment.Metadata>
             <div>Today at 5:42PM</div>
           </Comment.Metadata>
@@ -129,8 +167,8 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
                   <Header as='h3'>Comments</Header>
                   { ticket.comments.map(this.commentRow) }
                   <Form reply>
-                    <Form.TextArea />
-                    <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+                    <Form.TextArea name='content' onChange={this.handleChange} value={this.state.content.value} error={this.state.content.hasError} />
+                    <Button content='Add Reply' labelPosition='left' icon='edit' onClick={this.onCreateComment} primary />
                   </Form>
                 </Comment.Group>
               </Grid.Column>
@@ -145,13 +183,16 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 TicketPage.propTypes = {
   match: PropTypes.object.isRequired,
   ticketpage: PropTypes.object.isRequired,
+  application: PropTypes.object.isRequired,
   redirectTo: PropTypes.func.isRequired,
   getTicket: PropTypes.func.isRequired,
   putTicket: PropTypes.func.isRequired,
+  postComment: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
   ticketpage: makeSelectTicketPage(),
+  application: makeSelectApplication(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -159,6 +200,7 @@ function mapDispatchToProps(dispatch) {
     redirectTo: (url) => dispatch(push(url)),
     getTicket: (ticketId) => dispatch(getTicket(ticketId)),
     putTicket: (ticket, ticketId) => dispatch(putTicket(ticket, ticketId)),
+    postComment: (comment, accountId, accountType) => dispatch(postComment(comment, accountId, accountType)),
   };
 }
 

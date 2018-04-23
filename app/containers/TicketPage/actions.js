@@ -4,7 +4,7 @@
  *
  */
 
-import { GET_TICKET, GET_TICKET_SUCCEDED, GET_TICKET_FAILED, PUT_TICKET, PUT_TICKET_SUCCEDED, PUT_TICKET_FAILED } from './constants';
+import { GET_TICKET, GET_TICKET_SUCCEDED, GET_TICKET_FAILED, PUT_TICKET, PUT_TICKET_SUCCEDED, PUT_TICKET_FAILED, POST_COMMENT, POST_COMMENT_SUCCEDED, POST_COMMENT_FAILED } from './constants';
 
 export function getTicket(ticketId) {
   return {
@@ -45,6 +45,29 @@ export function putTicketSucceded() {
 export function putTicketFailed(error) {
   return {
     type: PUT_TICKET_FAILED,
+    error,
+  };
+}
+
+export function postComment(comment, accountId, accountType) {
+  return {
+    type: POST_COMMENT,
+    comment,
+    accountId,
+    accountType,
+  };
+}
+
+export function postCommentSucceded(comment) {
+  return {
+    type: POST_COMMENT_SUCCEDED,
+    comment,
+  };
+}
+
+export function postCommentFailed(error) {
+  return {
+    type: POST_COMMENT_FAILED,
     error,
   };
 }
