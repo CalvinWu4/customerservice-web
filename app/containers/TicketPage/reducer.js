@@ -19,6 +19,7 @@ const initialState = fromJS({
     description: '',
     opened: '',
     closed: '',
+    comments: [],
   },
 });
 
