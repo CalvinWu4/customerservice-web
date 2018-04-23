@@ -13,6 +13,7 @@ import { push } from 'react-router-redux';
 
 import NavigationBar from 'components/NavigationBar';
 import UpdateTicketModal from 'components/UpdateTicketModal';
+import CreateReviewModal from 'components/CreateReviewModal';
 
 import { Grid, Card, Breadcrumb, Comment, Header, Form, Button, Icon } from 'semantic-ui-react';
 
@@ -22,7 +23,7 @@ import makeSelectTicketPage from './selectors';
 import makeSelectApplication from './../Application/selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getTicket, putTicket, postComment } from './actions';
+import { getTicket, putTicket, postComment, postReview } from './actions';
 
 export class TicketPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -30,17 +31,20 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 
     this.state = {
       isUpdateTicketModalOpen: false,
+      isCreateReviewModalOpen: false,
       content: { value: '', hasError: false },
     };
 
     this.openUpdateTicketModal = this.openUpdateTicketModal.bind(this);
     this.closeUpdateTicketModal = this.closeUpdateTicketModal.bind(this);
+    this.openCreateReviewModal = this.openCreateReviewModal.bind(this);
+    this.closeCreateReviewModal = this.closeCreateReviewModal.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.onUpdateTicket = this.onUpdateTicket.bind(this);
     this.onCreateComment = this.onCreateComment.bind(this);
     this.commentRow = this.commentRow.bind(this);
     this.validateComment = this.validateComment.bind(this);
-
+    this.onCreateReview = this.onCreateReview.bind(this);
     this.getCommentAuthor = this.getCommentAuthor.bind(this);
   }
 
@@ -61,6 +65,12 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
     const { ticketId } = this.props.match.params;
     const { account, accountType } = this.props.application;
     this.props.postComment({ content: this.state.content.value, ticketId }, account.id, accountType);
+  }
+
+  onCreateReview(review) {
+    const ticket = this.props.ticketpage.ticket;
+    this.props.postReview({ ...review, agentId: ticket.agentId }, ticket.client.id, ticket.id);
+    this.closeCreateReviewModal();
   }
 
 
@@ -87,6 +97,18 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
   closeUpdateTicketModal() {
     this.setState({
       isUpdateTicketModalOpen: false,
+    });
+  }
+
+  openCreateReviewModal() {
+    this.setState({
+      isCreateReviewModalOpen: true,
+    });
+  }
+
+  closeCreateReviewModal() {
+    this.setState({
+      isCreateReviewModalOpen: false,
     });
   }
 
@@ -122,6 +144,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
       <div style={{ width: '100%', height: '100vh' }}>
         <NavigationBar redirectTo={this.props.redirectTo}>
           <UpdateTicketModal open={this.state.isUpdateTicketModalOpen} onCancel={this.closeUpdateTicketModal} ticket={ticket} onUpdate={this.onUpdateTicket} />
+          <CreateReviewModal open={this.state.isCreateReviewModalOpen} onCancel={this.closeCreateReviewModal} onCreate={this.onCreateReview} />
           <Grid>
             <Grid.Row>
               <Grid.Column width={8}>
@@ -132,7 +155,8 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
                 </Breadcrumb>
               </Grid.Column>
               <Grid.Column textAlign='right' width={8}>
-                <Button onClick={this.openUpdateTicketModal}><Icon name='edit' /> Edit</Button>
+                { ticket.status === 'closed' ? (<Button color='yellow' onClick={this.openCreateReviewModal}><Icon name='pencil' /> Add review</Button>) : null }
+                { ticket.status !== 'closed' ? (<Button onClick={this.openUpdateTicketModal}><Icon name='edit' /> Edit</Button>) : null }
               </Grid.Column>
             </Grid.Row>
             <Grid.Row>
@@ -188,6 +212,7 @@ TicketPage.propTypes = {
   getTicket: PropTypes.func.isRequired,
   putTicket: PropTypes.func.isRequired,
   postComment: PropTypes.func.isRequired,
+  postReview: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -201,6 +226,7 @@ function mapDispatchToProps(dispatch) {
     getTicket: (ticketId) => dispatch(getTicket(ticketId)),
     putTicket: (ticket, ticketId) => dispatch(putTicket(ticket, ticketId)),
     postComment: (comment, accountId, accountType) => dispatch(postComment(comment, accountId, accountType)),
+    postReview: (review, clientId, ticketId) => dispatch(postReview(review, clientId, ticketId)),
   };
 }
 

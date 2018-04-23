@@ -42,3 +42,7 @@ export function getTicketAPI(ticketId) {
 export function postCommentAPI(comment, accountId, accountType) {
   return axios.post(`${ROOT_URI}/comments?${getAccountQueryName(accountId, accountType)}`, comment, { headers: { 'Content-Type': 'application/json' } });
 }
+
+export function postReviewAPI(review, clientId) {
+  return axios.post(`${ROOT_URI}/reviews?clientId=${clientId}`, review, { headers: { 'Content-Type': 'application/json' } });
+}

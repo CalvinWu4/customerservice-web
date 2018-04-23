@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { GET_TICKET, PUT_TICKET, POST_COMMENT } from './constants';
-import { getTicketAPI, putTicketAPI, postCommentAPI } from './../../api';
+import { GET_TICKET, PUT_TICKET, POST_COMMENT, POST_REVIEW } from './constants';
+import { getTicketAPI, putTicketAPI, postCommentAPI, postReviewAPI } from './../../api';
 import { getTicketSucceded, getTicket } from './actions';
 
 function* getTicketSaga(action) {
@@ -30,10 +30,19 @@ function* postCommentSaga(action) {
   }
 }
 
+function* postReviewSaga(action) {
+  try {
+    yield call(postReviewAPI, action.review, action.clientId);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export default function* defaultSaga() {
   yield [
     takeLatest(GET_TICKET, getTicketSaga),
     takeLatest(PUT_TICKET, putTicketSaga),
     takeLatest(POST_COMMENT, postCommentSaga),
+    takeLatest(POST_REVIEW, postReviewSaga),
   ];
 }
