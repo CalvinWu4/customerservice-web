@@ -15,8 +15,8 @@ const initialState = fromJS({
   accountType: 'employee',
   account: {
     id: 0,
-    firstName: '',
-    lastName: '',
+    firstName: 'John',
+    lastName: 'Doe',
     email: '',
     address: {
       line1: '',

@@ -28,6 +28,7 @@ function* postLoginSaga(action) {
     const { data } = yield call(postLoginAPI, action.email, action.password);
 
     const token = jwt(data.token);
+    sessionStorage.setItem('kuwcs', data.token);
     const result = yield call(getClientAPI, token.id);
 
     yield put(postLoginSucceded({ ...data, account: result.data, accountType: token.accountType }));

@@ -15,7 +15,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Application from 'containers/Application';
-import Auth from 'containers/Auth';
 import HomePage from 'containers/HomePage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import SignupPage from 'containers/SignupPage/Loadable';
@@ -32,12 +31,10 @@ export default function App() {
         <Route exact path='/' component={HomePage} />
         <Route exact path='/login' component={LoginPage} />
         <Route exact path='/signup' component={SignupPage} />
-        <Auth>
-          <Route exact path='/tickets' component={TicketListPage} />
-          <Route exact path='/tickets/:ticketId' component={TicketPage} />
-          <Route exact path='/reviews' component={MyReviewsPage} />
-          <Route exact path='/clients' component={ClientsPage} />
-        </Auth>
+        <Route exact path='/tickets' component={TicketListPage} />
+        <Route exact path='/tickets/:ticketId' component={TicketPage} />
+        <Route exact path='/reviews' component={MyReviewsPage} />
+        <Route exact path='/clients' component={ClientsPage} />
         <Route component={NotFoundPage} />
       </Switch>
     </Application>
