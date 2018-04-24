@@ -93,7 +93,7 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
     return (
       <div style={{ width: '100%', height: '100vh' }}>
         <CreateTicketByClientModal open={this.state.isCreateTicketByClientModalOpen} onCancel={this.closeCreateTicketByClientModal} onCreate={this.onCreateTicket} clients={this.props.application.clients} />
-        <NavigationBar redirectTo={this.props.redirectTo}>
+        <NavigationBar redirectTo={this.props.redirectTo} agent={this.props.application.accountType === 'employee'} name={`${this.props.application.account.firstName} ${this.props.application.account.lastName}`}>
           <Grid>
             <Grid.Row>
               <Grid.Column width={8}>

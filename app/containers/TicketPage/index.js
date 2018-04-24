@@ -76,7 +76,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 
   getCommentAuthor(comment) {
     const { accountType } = this.props.application;
-    const commentedBy = comment.clientId !== -1 ? 'customer' : 'employeee';
+    const commentedBy = comment.clientId !== -1 ? 'customer' : 'employee';
     if (accountType === commentedBy) return 'Me';
 
     return commentedBy === 'customer' ? 'Client' : 'Agent';
@@ -126,11 +126,11 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
         <Comment.Content>
           <Comment.Author as='a'>{ this.getCommentAuthor(comment) }</Comment.Author>
           <Comment.Metadata>
-            <div>Today at 5:42PM</div>
+            <div>Sent via web</div>
           </Comment.Metadata>
           <Comment.Text>{comment.content}</Comment.Text>
           <Comment.Actions>
-            <Comment.Action>Reply</Comment.Action>
+
           </Comment.Actions>
         </Comment.Content>
       </Comment>
@@ -142,7 +142,7 @@ export class TicketPage extends React.Component { // eslint-disable-line react/p
 
     return (
       <div style={{ width: '100%', height: '100vh' }}>
-        <NavigationBar redirectTo={this.props.redirectTo}>
+        <NavigationBar redirectTo={this.props.redirectTo} agent={this.props.application.accountType === 'employee'} name={`${this.props.application.account.firstName} ${this.props.application.account.lastName}`}>
           <UpdateTicketModal open={this.state.isUpdateTicketModalOpen} onCancel={this.closeUpdateTicketModal} ticket={ticket} onUpdate={this.onUpdateTicket} />
           <CreateReviewModal open={this.state.isCreateReviewModalOpen} onCancel={this.closeCreateReviewModal} onCreate={this.onCreateReview} />
           <Grid>

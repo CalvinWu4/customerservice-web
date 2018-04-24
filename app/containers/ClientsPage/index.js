@@ -1,6 +1,6 @@
 /**
  *
- * MyReviewsPage
+ * ClientsPage
  *
  */
 
@@ -16,30 +16,29 @@ import NavigationBar from 'components/NavigationBar';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectMyReviewsPage from './selectors';
+import makeSelectClientsPage from './selectors';
 import makeSelectApplication from './../Application/selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getReviews } from './actions';
+import { getClients } from './actions';
 
-export class MyReviewsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
+export class ClientsPage extends React.Component { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
 
-    this.reviewRow = this.reviewRow.bind(this);
+    this.clientRow = this.clientRow.bind(this);
   }
 
   componentDidMount() {
-    const { id } = this.props.application.account;
-    this.props.getReviews(id);
+    this.props.getClients();
   }
 
-  reviewRow(review) {
+  clientRow(client) {
     return (
-      <Table.Row key={`containers_myreviewspage_review_${review.id}`}>
-        <Table.Cell>{review.title}</Table.Cell>
-        <Table.Cell>{review.ticketId}</Table.Cell>
-        <Table.Cell>{review.description}</Table.Cell>
+      <Table.Row key={`containers_clientspage_client_${client.id}`}>
+        <Table.Cell>{client.firstName}</Table.Cell>
+        <Table.Cell>{client.lastName}</Table.Cell>
+        <Table.Cell>{client.email}</Table.Cell>
       </Table.Row>
     );
   }
@@ -52,11 +51,11 @@ export class MyReviewsPage extends React.Component { // eslint-disable-line reac
             <Grid.Row>
               <Grid.Column>
                 <Header as='h2'>
-                  <Icon name='thumbs outline up' />
+                  <Icon name='users' />
                   <Header.Content>
-                    Reviews
+                    Clients
                     <Header.Subheader>
-                      From my clients
+                      In KennUWare
                     </Header.Subheader>
                   </Header.Content>
                 </Header>
@@ -67,13 +66,13 @@ export class MyReviewsPage extends React.Component { // eslint-disable-line reac
                 <Table>
                   <Table.Header>
                     <Table.Row>
-                      <Table.HeaderCell width={5}>Title</Table.HeaderCell>
-                      <Table.HeaderCell width={3}>Ticket ID</Table.HeaderCell>
-                      <Table.HeaderCell width={8}>Description</Table.HeaderCell>
+                      <Table.HeaderCell width={5}>First name</Table.HeaderCell>
+                      <Table.HeaderCell width={5}>Last name</Table.HeaderCell>
+                      <Table.HeaderCell width={6}>Email</Table.HeaderCell>
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    { this.props.myreviewspage.reviews.map(this.reviewRow) }
+                    {this.props.clientspage.clients.map(this.clientRow)}
                   </Table.Body>
                 </Table>
               </Grid.Column>
@@ -85,32 +84,32 @@ export class MyReviewsPage extends React.Component { // eslint-disable-line reac
   }
 }
 
-MyReviewsPage.propTypes = {
+ClientsPage.propTypes = {
   redirectTo: PropTypes.func.isRequired,
-  myreviewspage: PropTypes.object.isRequired,
+  clientspage: PropTypes.object.isRequired,
+  getClients: PropTypes.func.isRequired,
   application: PropTypes.object.isRequired,
-  getReviews: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  myreviewspage: makeSelectMyReviewsPage(),
+  clientspage: makeSelectClientsPage(),
   application: makeSelectApplication(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     redirectTo: (url) => dispatch(push(url)),
-    getReviews: (agentId) => dispatch(getReviews(agentId)),
+    getClients: () => dispatch(getClients()),
   };
 }
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-const withReducer = injectReducer({ key: 'myReviewsPage', reducer });
-const withSaga = injectSaga({ key: 'myReviewsPage', saga });
+const withReducer = injectReducer({ key: 'clientsPage', reducer });
+const withSaga = injectSaga({ key: 'clientsPage', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(MyReviewsPage);
+)(ClientsPage);
