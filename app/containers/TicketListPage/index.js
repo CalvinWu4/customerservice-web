@@ -15,7 +15,7 @@ import makeSelectApplication from 'containers/Application/selectors';
 import NavigationBar from 'components/NavigationBar';
 import CreateTicketByClientModal from 'components/CreateTicketByClientModal';
 
-import { Grid, Header, Icon, Button, Table, Label, Menu } from 'semantic-ui-react';
+import { Grid, Header, Icon, Button, Table, Label } from 'semantic-ui-react';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -113,14 +113,6 @@ export class TicketListPage extends React.Component { // eslint-disable-line rea
             </Grid.Row>
             <Grid.Row>
               <Grid.Column width={16}>
-                <Menu style={{ marginLeft: '0px', marginBottom: '0px' }} text>
-                  <Menu.Item header>Sort by</Menu.Item>
-                  <Menu.Item content='Assigned to me' active />
-                  <Menu.Item content='New' />
-                  <Menu.Item content='In-progress' />
-                  <Menu.Item content='Closed' />
-                  <Menu.Item content='All' />
-                </Menu>
                 <Table style={{ marginTop: '0px' }} striped selectable>
                   <Table.Header>
                     <Table.Row>

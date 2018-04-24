@@ -19,6 +19,10 @@ export function getClientAPI(clientId) {
   return axios.get(`${ROOT_URI}/clients/${clientId}`);
 }
 
+export function getReviewsAPI(agentId) {
+  return axios.get(`${ROOT_URI}/reviews?agentId=${agentId}`);
+}
+
 export function postLoginAPI(email, password) {
   return axios.post('https://api-gateway-343.herokuapp.com/auth/login', { username: email, password }, { headers: { 'Content-Type': 'application/json' } });
 }
