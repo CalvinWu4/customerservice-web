@@ -23,5 +23,5 @@ export function getClientsFailed(error) {
   return {
     type: GET_CLIENTS_FAILED,
     error,
-  }
+  };
 }
